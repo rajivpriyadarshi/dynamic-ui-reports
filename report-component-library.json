@@ -1,0 +1,1077 @@
+{
+  "spec": "portfolio-report-component-library",
+  "version": "1.0.0",
+  "generated_from": "shadcn-app/components/portfolio-report/*, app/lab/portfolio-report/{prashanth,eleanor}/report.tsx",
+  "as_of": "2026-09-28",
+  "purpose": [
+    "This file is the contract between a client record and a rendered portfolio report.",
+    "It is written to be pasted into an LLM prompt. Given a set of facts extracted from a client record, the model uses it to decide (a) which component renders each fact, (b) which section the fact belongs to, and (c) what to do when no component fits.",
+    "It is a routing table plus the editorial rules that keep the output from looking machine-assembled. Both halves matter: picking the right component and then not over-using it are the same job."
+  ],
+  "non_goals": [
+    "This is not a design system. The visual language lives in the shadcn preset (style base-vega, baseColor olive) and in components/ui/*. Do not restyle.",
+    "This is not a generic report engine. Every component here is semantic — it answers one question about a portfolio. There is deliberately no FancyCard, DataBox, ChartBlock or InsightCard, and none should be added.",
+    "This does not define the data schema. That is the client record (see fixtures/03_prashanth_ranganathan.json and fixtures/04_eleanor_whitfield.json)."
+  ],
+  "implementation_status": {
+    "warning": "READ THIS BEFORE WIRING ANYTHING.",
+    "detail": "In the reference build most components import their data directly from a single client's module (app/lab/portfolio-report/<client>/data.ts) rather than taking props. The `input` field on each entry below is therefore the INTENDED contract, not in all cases the current signature.",
+    "prop_driven_today": [
+      "AllocationBreakdown",
+      "ChangeLedger",
+      "Chapter",
+      "ConcentrationShift",
+      "DataLimitation",
+      "DecisionList",
+      "DependencyFlow",
+      "EventTimeline",
+      "Eyebrow",
+      "Figure",
+      "Figures",
+      "HoldingsTable",
+      "LiquidityCover",
+      "Narrative",
+      "ReadoutMetrics",
+      "ReturnAttribution",
+      "TargetRange"
+    ],
+    "data_module_bound_today": "Everything else. Lifting these to props is mechanical — the `input` field below states the shape to lift to — but it has not been done, and a backend that assumes props will fail to compile.",
+    "rsc_constraint": "Report pages are server components; several exhibits are client components (charts). Function props cannot cross that boundary. Pass a currency code (string) and format inside the client component, or keep the formatter on the server side. HoldingsTable takes `currency: string` for exactly this reason; AllocationBreakdown takes a `money` function because it is rendered on the server."
+  },
+  "units_and_formatting": {
+    "amounts": "Components expect amounts as floats in MILLIONS of the report's display currency (16.0 means 16,000,000). The client record stores absolute values as strings. Convert at the boundary, once, and state the FX rates used in the sources line.",
+    "percentages": "Two conventions exist and they are not interchangeable. Prashanth's helpers take PERCENTAGE POINTS (signedPct(14.0) -> '+14.0%'); Eleanor's take a FRACTION (signedPct(0.061) -> '+6.1%'). Pick one per report and state it in the data module header.",
+    "typography_rule": "Numbers get strong typography, labels get understated typography. Values are tabular-nums and medium weight; labels are small, muted, and never bold.",
+    "rounding": "Round for display only. Never round in prose where the unrounded figure is the point (a 15-month-old valuation is 'fifteen months', not 'over a year')."
+  },
+  "sections": {
+    "binding": "SOFT",
+    "how_soft": [
+      "These seven sections are the narrative spine of the reference report, in this order. They are chapters in a document, NOT seven cards and NOT a fixed set of slots.",
+      "A section may be omitted entirely when the record has nothing for it. An absent section is better than a padded one.",
+      "A section may be shortened to two sentences. Section 03 in the Eleanor reference is deliberately the shortest in the report because the data is not there.",
+      "Two adjacent sections may merge if the record is thin, provided the numbering stays contiguous.",
+      "Sections must NOT all have the same layout. If two consecutive sections have the same internal structure, change one.",
+      "`admits` is guidance for routing, not a whitelist. A fact that plainly belongs in a section that does not list it still goes there. `rejects` is firmer — those are the misplacements that broke comprehension in review.",
+      "Sections may be DROPPED when the source cannot support them, and 'required' marks only the two that no source can be missing: 01 and 07. Everything else is conditional on data. See each section's required_note."
+    ],
+    "titles": {
+      "rule": "A section title must tell the reader what is in the section, in plain words, from the reader's point of view. It must not describe the analysis process and must not be a riddle.",
+      "rejected_examples": [
+        "'Who decides' — this is an answer to a different question than the section asks.",
+        "'What the record can measure' — describes the author's process, tells the reader nothing."
+      ],
+      "guidance": "Use the same plain title set across clients. Carry the client-specific difference in the FIRST SENTENCE of the section, not in the title."
+    },
+    "list": [
+      {
+        "id": "01",
+        "title": "Where things stand",
+        "answers": "If the reader reads nothing else, what do they need to know?",
+        "opens_with": "One headline sentence, max-w-[32ch] at text-[2rem], stating the single most important tension in the record — not a summary. It should contain a 'but' or an 'and yet'.",
+        "admits": [
+          "net worth and total assets",
+          "the one dominant finding",
+          "top-level composition",
+          "geographic or jurisdictional spread",
+          "3-4 headline metrics"
+        ],
+        "rejects": [
+          "detail that is explained later",
+          "more than four metrics",
+          "any chart that needs a paragraph to read"
+        ],
+        "typical_components": [
+          "ReadoutMetrics",
+          "AllocationBreakdown",
+          "JurisdictionSpread"
+        ],
+        "layout": "Headline left, a compact exhibit right (grid-cols-[minmax(0,1fr)_minmax(0,20rem)], items-end), then narrative, then the metrics row full width.",
+        "required": true,
+        "required_note": "Always required. A report with no opening state is a list, not a report."
+      },
+      {
+        "id": "02",
+        "title": "What changed",
+        "answers": "What moved since the last review, and was it a real gain or just a remeasurement?",
+        "admits": [
+          "from -> to changes",
+          "revaluations",
+          "approvals",
+          "newly raised but undecided items",
+          "status changes on structures"
+        ],
+        "rejects": [
+          "market commentary",
+          "anything undated and unattributed",
+          "performance figures (those are 03)"
+        ],
+        "typical_components": [
+          "ChangeLedger"
+        ],
+        "layout": "Short narrative at reading measure, then one full-width ledger. Deliberately the plainest section in the report.",
+        "required": false,
+        "note": "Distinguish a REVALUATION from a RETURN explicitly. Getting this wrong is the most damaging error in the report, because it tells the reader they earned money they did not earn."
+      },
+      {
+        "id": "03",
+        "title": "How the portfolio has done",
+        "answers": "What return was achieved, over what period, against what?",
+        "admits": [
+          "indexed series",
+          "period returns",
+          "benchmark comparison",
+          "contribution by holding",
+          "cost-to-market bridge where no series exists"
+        ],
+        "rejects": [
+          "any return figure not present in or derivable from the record",
+          "a benchmark chosen to flatter",
+          "a series invented to fill the space"
+        ],
+        "typical_components": [
+          "PerformanceVsBenchmark",
+          "ManagerComparison",
+          "ContributionAnalysis",
+          "CostToMarket",
+          "DataLimitation",
+          "ReturnAttribution"
+        ],
+        "layout": "Full-width chart, separator, then a two-column split of a second exhibit against narrative (grid-cols-[minmax(0,1.15fr)_minmax(0,1fr)]).",
+        "required": false,
+        "note": "If the record has a cost basis and a market value and nothing in between, there is NO performance history. Say so with DataLimitation and render CostToMarket instead. Do not synthesise a monthly series. This is the single most common place where an LLM will invent data."
+      },
+      {
+        "id": "04",
+        "title": "What <they> own",
+        "answers": "What are the actual assets, who holds them, and where?",
+        "admits": [
+          "holdings tables",
+          "the same book cut several ways",
+          "ownership and entity structure",
+          "property",
+          "private funds",
+          "non-financial assets",
+          "look-through exposure"
+        ],
+        "rejects": [
+          "risk findings (those are 05)",
+          "a table of every category when only two matter"
+        ],
+        "typical_components": [
+          "HoldingsTable",
+          "ExposureLens",
+          "OwnershipLayers",
+          "EntityStructure",
+          "LookThroughExposure",
+          "LifestyleAssets",
+          "GainComposition"
+        ],
+        "layout": "The widest and most varied section. Alternate full-bleed exhibits with max-w-[880px] and max-w-[900px] blocks, and put at least one exhibit beside narrative at grid-cols-[minmax(0,26rem)_minmax(0,1fr)].",
+        "required": false,
+        "required_note": "Not required. It is the first section a thin source loses: it needs a holdings list, and a one-page review note has none. Omit it rather than heading an empty table, and say so in the closing disclosure. When it IS omitted, renumber the remaining sections contiguously - a report that jumps 03 to 05 reads as a rendering fault."
+      },
+      {
+        "id": "05",
+        "title": "What needs attention",
+        "answers": "What in this record is a problem, and how big is it?",
+        "structure": "Repeating sub-blocks, one per finding, separated by <Separator className='my-16' />. Each sub-block: an h3 stating the finding as a complete sentence at max-w-[46ch] text-2xl, then narrative and/or an exhibit.",
+        "heading_rule": "The h3 must be the FINDING, not the topic. 'Technology is 56.6% of his listed holdings, and nobody decided that' — not 'Concentration'. It should be readable as a standalone claim and should name the consequence.",
+        "admits": [
+          "concentration",
+          "liquidity shortfalls against a stated floor",
+          "stale valuations",
+          "leverage secured against concentrated assets",
+          "governance blocks",
+          "unwritten policy"
+        ],
+        "rejects": [
+          "a finding without a number",
+          "a finding the record does not support",
+          "red alarm styling"
+        ],
+        "typical_components": [
+          "ConcentrationRisk",
+          "TargetRange",
+          "ExposureTrend",
+          "LiquidityLadder",
+          "ValuationAge",
+          "RealisableSplit",
+          "LiabilityStack",
+          "CapitalFlow",
+          "DependencyFlow",
+          "ConcentrationShift",
+          "LiquidityCover"
+        ],
+        "layout": "Vary every sub-block. Some full width, some grid-cols-[minmax(0,1fr)_minmax(0,20rem)], some narrative-only.",
+        "required": false,
+        "required_note": "Not required in the strict sense, but in practice every source that supports a report at all supports at least one finding. Drop it only if there is genuinely nothing to flag, not because the findings are hard to compute."
+      },
+      {
+        "id": "06",
+        "title": "What's coming",
+        "answers": "What is dated, what does it cost, and what is blocked behind something else?",
+        "admits": [
+          "dated commitments",
+          "capital calls",
+          "tax payments",
+          "blocked items with a named dependency",
+          "confidence on each date"
+        ],
+        "rejects": [
+          "undated items presented as if dated",
+          "a date the record does not state"
+        ],
+        "typical_components": [
+          "EventTimeline",
+          "AsAtMap",
+          "DependencyFlow"
+        ],
+        "layout": "Timeline at grid-cols-[minmax(0,32rem)_minmax(0,1fr)] with narrative beside it at text-[0.8125rem].",
+        "required": false,
+        "note": "Mark low-confidence dates as such. An estimated tax date and a contractual capital call date are not the same kind of fact."
+      },
+      {
+        "id": "07",
+        "title": "What to decide",
+        "answers": "What does the reader actually have to do, and in what order?",
+        "admits": [
+          "open decisions with the basis for each",
+          "owners",
+          "sequencing where one decision gates another",
+          "sources and basis of preparation"
+        ],
+        "rejects": [
+          "anything phrased as a recommendation the record does not support",
+          "actions without an owner or a reason"
+        ],
+        "typical_components": [
+          "DecisionList",
+          "DecisionOrder",
+          "ActionOwnership"
+        ],
+        "layout": "Narrow, max-w-[760px]. Then sources as a plain two-column dl at text-xs. The report should end quiet.",
+        "required": true,
+        "required_note": "Always required. It is the reason the report is being written."
+      }
+    ]
+  },
+  "components": [
+    {
+      "id": "readout-metrics",
+      "component": "ReadoutMetrics",
+      "import": "@/components/portfolio-report/readout-metrics",
+      "answers": "What are the three or four numbers that define this portfolio?",
+      "input": {
+        "metrics": "{ label: string, value: string, detail?: string }[]"
+      },
+      "cardinality": {
+        "min": 3,
+        "max": 4
+      },
+      "width": "full",
+      "use_when": "Exactly once, in section 01, for headline figures that are already computed and need no explanation.",
+      "avoid_when": "You have five or more figures, or any figure needs a caption to make sense. Both mean this is the wrong component — the extra figures belong in an exhibit further down. Never use it as a dashboard KPI grid.",
+      "label_rule": "Labels are plain nouns: 'Net worth', 'Ready cash', 'Hard to sell'. Not 'Liquidity', not 'AUM', not a contraction.",
+      "degrade_to": "A single sentence in Narrative."
+    },
+    {
+      "id": "allocation-breakdown",
+      "component": "AllocationBreakdown",
+      "import": "@/components/portfolio-report/allocation-breakdown",
+      "answers": "How is the total split across asset categories?",
+      "input": {
+        "allocation": "readonly { label: string, weight: number }[]  // weight is a fraction of total",
+        "totalAssets": "number  // millions",
+        "money": "(millions: number) => string  // server-side formatter"
+      },
+      "cardinality": {
+        "min": 3,
+        "max": 6
+      },
+      "width": "narrow-to-medium (fits a 20rem column)",
+      "use_when": "Composition of a whole is itself the finding, in section 01 or 04.",
+      "avoid_when": "There are two categories (say it in a sentence), or more than six (group them first).",
+      "degrade_to": "A sentence naming the largest two shares."
+    },
+    {
+      "id": "jurisdiction-spread",
+      "component": "JurisdictionSpread",
+      "import": "@/components/portfolio-report/jurisdiction-spread",
+      "answers": "Which countries is the money actually in?",
+      "input": {
+        "jurisdictions": "{ country: string, name: string, value: number, count: number }[]  // sorted desc",
+        "unstated": "number  // value with no jurisdiction on record",
+        "residence": "string",
+        "nationality": "string"
+      },
+      "cardinality": {
+        "min": 2,
+        "max": 6
+      },
+      "width": "narrow (20rem column) or medium",
+      "use_when": "The record locates assets in more than one country AND that spread is not what the reader would guess from residence or nationality. That mismatch is the reason to render it.",
+      "avoid_when": "Everything is in one country.",
+      "critical_rule": "Report value with no recorded jurisdiction as UNSTATED. Do not assign it to the custodian's country. A custodian is not a jurisdiction.",
+      "degrade_to": "Omit.",
+      "bound_to": "eleanor"
+    },
+    {
+      "id": "change-ledger",
+      "component": "ChangeLedger",
+      "import": "@/components/portfolio-report/change-ledger",
+      "answers": "What moved since the last review?",
+      "input": {
+        "changes": "{ label: string, from: string, to: string, note: string, status?: 'Revaluation'|'Approved'|'Noted'|'Pending' }[]"
+      },
+      "cardinality": {
+        "min": 2,
+        "max": 6
+      },
+      "width": "full",
+      "use_when": "Section 02, whenever the record supports a before and an after.",
+      "avoid_when": "You can only state the after. A change needs both ends.",
+      "status_rule": "`status` renders as a Badge and must be a TRUE state of the item, not a severity or a mood. 'Revaluation', 'Approved', 'Noted', 'Pending' only.",
+      "note_rule": "The `note` is where the reader learns whether the change was earned or merely remeasured. Say which, explicitly.",
+      "degrade_to": "Narrative paragraph."
+    },
+    {
+      "id": "holdings-table",
+      "component": "HoldingsTable",
+      "import": "@/components/portfolio-report/holdings-table",
+      "answers": "What are the individual positions, and what is each worth against cost?",
+      "input": {
+        "holdings": "readonly { name: string, ticker?: string, group: string, marketValue: number, cost: number, gain: number }[]",
+        "currency": "string  // code, not a formatter — this is a client component",
+        "totalLabel": "string"
+      },
+      "cardinality": {
+        "min": 3,
+        "max": 25
+      },
+      "width": "full",
+      "use_when": "The reader needs line-item detail and the lines are genuinely comparable.",
+      "avoid_when": "Fewer than three lines, or the lines are not comparable (a property, a yacht and an ETF do not belong in one table). Do not force unlike things into a table just because the component exists.",
+      "degrade_to": "Name the largest two or three positions in prose."
+    },
+    {
+      "id": "exposure-lens",
+      "component": "ExposureLens",
+      "import": "@/components/portfolio-report/exposure-lens",
+      "answers": "What does the same set of holdings look like cut a different way?",
+      "input": {
+        "lenses": "{ key: string, label: string, caption: string, marks: boolean, rows: { label: string, sublabel?: string, value: number, emphasis?: boolean }[] }[]",
+        "currency": "string"
+      },
+      "marks_rule": "`marks` renders a 1.25rem hairline letter-mark slot before each label — a placeholder for a holding's logo, seeded from `sublabel` if present else `label`. Set it true only where rows are ISSUERS that could have artwork (securities, private companies, digital assets). Set it false where rows are abstractions (a sector, a currency, an asset class): an empty logo slot beside 'Technology' is a slot with nothing to hold. Never emphasise the mark on an emphasised row — the name and the bar already carry that.",
+      "cardinality": {
+        "min": 2,
+        "max": 4,
+        "unit": "lenses"
+      },
+      "width": "full",
+      "interactive": true,
+      "use_when": "One book can be grouped by more than one dimension (custodian, entity, sector, currency) and the reader learns something different from each. The insight is that no single cut tells the whole story.",
+      "avoid_when": "Only one grouping is meaningful, or the cuts produce near-identical pictures.",
+      "caption_rule": "Each lens carries its own caption stating what THAT cut reveals. Without distinct captions this is just a toggle for its own sake.",
+      "degrade_to": "One grouping, rendered as a plain list.",
+      "bound_to": "prashanth"
+    },
+    {
+      "id": "concentration-risk",
+      "component": "ConcentrationRisk",
+      "import": "@/components/portfolio-report/concentration-risk",
+      "answers": "How much of the portfolio sits in one name or one theme?",
+      "input": {
+        "positions": "{ name: string, ticker?: string, marketValue: number, weight: number }[]",
+        "groupLabel": "string",
+        "groupValue": "number",
+        "groupWeight": "number"
+      },
+      "width": "medium-to-full",
+      "use_when": "A single name or sector exceeds roughly a fifth of a book and the record does not state a limit for it.",
+      "avoid_when": "The record states a policy limit — then use TargetRange, which can show the breach against the limit.",
+      "framing_rule": "With no stated policy this is an OBSERVATION, not a breach. Word it that way.",
+      "bound_to": "prashanth"
+    },
+    {
+      "id": "target-range",
+      "component": "TargetRange",
+      "import": "@/components/portfolio-report/target-range",
+      "answers": "Where does a measured value sit against a stated acceptable band?",
+      "input": {
+        "value": "number",
+        "min": "number",
+        "max": "number",
+        "domain?": "[number, number]",
+        "valueLabel": "string",
+        "bandLabel": "string"
+      },
+      "width": "narrow-to-medium",
+      "use_when": "The record states a target range, policy limit or mandate band. Use this rather than Progress, which cannot express a range.",
+      "avoid_when": "There is no stated band. Do NOT invent one to make the component usable. If a band is needed for a visual reference only, it goes in the demo fixture and the disclosure must render on the page.",
+      "hard_rule": "Never substitute Progress here. Progress expresses zero-to-value only and misrepresents a band as an achievement."
+    },
+    {
+      "id": "exposure-trend",
+      "component": "ExposureTrend",
+      "import": "@/components/portfolio-report/exposure-trend",
+      "answers": "Has this concentration been building, or did it just appear?",
+      "input": {
+        "history": "{ month: string, weight: number }[]",
+        "label": "string"
+      },
+      "cardinality": {
+        "min": 5,
+        "unit": "periods"
+      },
+      "width": "medium",
+      "interactive": true,
+      "use_when": "A weight series exists in the record and its direction changes the reader's interpretation of the level.",
+      "avoid_when": "Fewer than five periods, or the series would have to be estimated. A drifting weight is a claim about history.",
+      "bound_to": "prashanth"
+    },
+    {
+      "id": "contribution-analysis",
+      "component": "ContributionAnalysis",
+      "import": "@/components/portfolio-report/contribution-analysis",
+      "answers": "Which holdings produced the return?",
+      "input": {
+        "contributions": "{ name: string, pp: number }[]  // percentage points, signed",
+        "totalPp": "number"
+      },
+      "width": "medium-to-full",
+      "interactive": true,
+      "use_when": "A total return is known AND it can be attributed to named holdings from recorded cost and market values.",
+      "avoid_when": "Attribution would require an assumed holding period or assumed flows.",
+      "bound_to": "prashanth"
+    },
+    {
+      "id": "performance-vs-benchmark",
+      "component": "PerformanceVsBenchmark",
+      "import": "@/components/portfolio-report/performance-vs-benchmark",
+      "answers": "How did the portfolio track against its benchmark over time?",
+      "input": {
+        "series": "{ month: string, portfolio: number|null, benchmark: number|null }[]  // indexed to 100",
+        "asOf": "string",
+        "basis": "'RECORDED'|'ESTIMATED'"
+      },
+      "width": "full",
+      "interactive": true,
+      "use_when": "A period series exists for both portfolio and benchmark.",
+      "avoid_when": "Either series is absent. Nulls for unobserved periods are correct and must render as gaps, not as interpolation.",
+      "disclosure_rule": "If the series is ESTIMATED, say so on the page and state what it is anchored to. The reference build anchors to a single recorded statement ('+14% YTD') and reconciles the series to end exactly there.",
+      "bound_to": "prashanth"
+    },
+    {
+      "id": "manager-comparison",
+      "component": "ManagerComparison",
+      "import": "@/components/portfolio-report/manager-comparison",
+      "answers": "Did the portfolio beat its benchmark over each period that can be measured?",
+      "input": {
+        "periods": "{ period: string, window: string, portfolio: number, benchmark: number|null, alpha: number|null }[]"
+      },
+      "cardinality": {
+        "max": 4,
+        "unit": "periods"
+      },
+      "width": "medium",
+      "use_when": "Few periods and two series — paired bars read faster than a chart at this size. Filter out periods where benchmark is null.",
+      "avoid_when": "Performance is measured only at whole-portfolio level but the reader wants it per manager. Then render the bars you can and add DataLimitation saying which question cannot be answered.",
+      "bound_to": "prashanth"
+    },
+    {
+      "id": "cost-to-market",
+      "component": "CostToMarket",
+      "import": "@/components/portfolio-report/cost-to-market",
+      "answers": "What did these holdings cost, and what are they worth now?",
+      "input": {
+        "holdings": "{ name: string, kind: string, cost: number, marketValue: number }[]",
+        "currency": "string"
+      },
+      "width": "medium-to-full",
+      "interactive": true,
+      "use_when": "This is the performance fallback. Use it whenever there is a cost basis and a market value but no series in between — which is most private-bank records.",
+      "avoid_when": "A real return series exists; then use PerformanceVsBenchmark.",
+      "framing_rule": "This is return ON COST with no holding period, so it is NOT an annual return and must never be labelled as one.",
+      "bound_to": "eleanor"
+    },
+    {
+      "id": "gain-composition",
+      "component": "GainComposition",
+      "import": "@/components/portfolio-report/gain-composition",
+      "answers": "How much of the current value is original cost and how much is gain?",
+      "input": {
+        "cost": "number",
+        "gain": "number",
+        "marketValue": "number",
+        "currency": "string"
+      },
+      "width": "narrow",
+      "use_when": "Beside a holdings table or narrative, to make an unrealised gain concrete.",
+      "avoid_when": "The gain is small enough that the split is visually meaningless.",
+      "bound_to": "prashanth"
+    },
+    {
+      "id": "look-through-exposure",
+      "component": "LookThroughExposure",
+      "import": "@/components/portfolio-report/look-through-exposure",
+      "answers": "What is the real exposure once funds are looked through to their holdings?",
+      "input": {
+        "direct": "{ name: string, value: number }[]",
+        "viaFunds": "{ name: string, value: number, fund: string }[]",
+        "total": "number"
+      },
+      "width": "medium-to-full",
+      "use_when": "An index fund or feeder holds more of a name the client already owns directly, so the headline weight understates the true exposure.",
+      "avoid_when": "Fund holdings are not recorded. Do not model a fund's composition from general knowledge of the index — that is invented data.",
+      "bound_to": "prashanth"
+    },
+    {
+      "id": "ownership-layers",
+      "component": "OwnershipLayers",
+      "import": "@/components/portfolio-report/ownership-layers",
+      "answers": "Who legally owns each asset, as distinct from who benefits from it?",
+      "input": {
+        "assets": "{ name: string, owner: string, ownerKind: 'personal'|'trust'|'company', value: number }[]",
+        "currency": "string"
+      },
+      "width": "medium-to-full",
+      "use_when": "Assets sit across personal names, trusts and companies — especially when the largest single asset is not held personally. That gap is usually the finding.",
+      "avoid_when": "Everything is personally held.",
+      "bound_to": "prashanth"
+    },
+    {
+      "id": "entity-structure",
+      "component": "EntityStructure",
+      "import": "@/components/portfolio-report/entity-structure",
+      "answers": "Which entities exist and what does each hold?",
+      "input": {
+        "entities": "{ name: string, kind?: string, role?: string, items: { name: string, value: number }[], unattributed?: boolean }[]"
+      },
+      "width": "medium-to-full",
+      "use_when": "The record names trusts or holding companies with assets attributed to them.",
+      "avoid_when": "Entities are named but hold nothing attributable — then it is a sentence, not an exhibit.",
+      "unattributed_rule": "Assets with no named holder must render in an explicit unattributed group. Do not silently assign them to the client.",
+      "bound_to": "eleanor"
+    },
+    {
+      "id": "lifestyle-assets",
+      "component": "LifestyleAssets",
+      "import": "@/components/portfolio-report/lifestyle-assets",
+      "answers": "What are the non-financial assets worth against what they cost?",
+      "input": {
+        "assets": "{ name: string, kind: 'vehicle'|'collectible', marketValue: number, cost: number }[]",
+        "excluded?": "string",
+        "currency": "string"
+      },
+      "width": "medium",
+      "interactive": true,
+      "use_when": "Vehicles, art, watches, wine and similar are recorded with both cost and market value. The point is usually that some appreciate and some do not.",
+      "avoid_when": "Only cost is recorded. Assets carried at cost only must be named in `excluded`, not charted at cost as if that were a valuation.",
+      "bound_to": "prashanth"
+    },
+    {
+      "id": "liquidity-ladder",
+      "component": "LiquidityLadder",
+      "import": "@/components/portfolio-report/liquidity-ladder",
+      "answers": "Does cash survive the dated commitments, and does it stay above the client's own floor?",
+      "input": {
+        "cash": "number",
+        "reserve": "number  // the client's STATED floor",
+        "commitments": "{ name: string, amount: number, on: string, iso: string, when: string, confidence: 'high'|'medium' }[]",
+        "currency": "string"
+      },
+      "width": "full",
+      "interactive": true,
+      "use_when": "There is a cash balance, dated outflows, and a floor the client stated themselves.",
+      "avoid_when": "No floor is stated. Do not invent one — without a threshold this is a schedule, so use EventTimeline instead.",
+      "chart_rule": "Step interpolation, not linear. Cash sits flat and drops on a date; a slope implies a drawdown that does not happen.",
+      "reference_line_rule": "Exactly one reference line, and only for a threshold the client set. Mark medium-confidence dates in the tooltip.",
+      "bound_to": "eleanor"
+    },
+    {
+      "id": "capital-flow",
+      "component": "CapitalFlow",
+      "import": "@/components/portfolio-report/capital-flow",
+      "answers": "Where is a specific payment coming from, and what is left after it?",
+      "input": {
+        "call": "{ amount: number, fund: string, deadline: string, fundingSource: string, approvedAt: string }",
+        "liquidity": "{ cash: number, treasuryBills: number, total: number }",
+        "currency": "string"
+      },
+      "width": "medium-to-full",
+      "use_when": "A single named commitment has an identified funding source. Shows source, use and remainder as one path.",
+      "avoid_when": "Multiple commitments compete for the same cash — that is LiquidityLadder.",
+      "bound_to": "prashanth"
+    },
+    {
+      "id": "realisable-split",
+      "component": "RealisableSplit",
+      "import": "@/components/portfolio-report/realisable-split",
+      "answers": "How much of this could actually be sold inside a quarter?",
+      "input": {
+        "liquid": "number",
+        "illiquid": "number",
+        "totalAssets": "number",
+        "components": "{ label: string, value: number, liquid: boolean }[]",
+        "currency": "string"
+      },
+      "width": "medium",
+      "use_when": "The illiquid share is high enough to be the finding, and the record does not state it as intent.",
+      "avoid_when": "The split is unremarkable.",
+      "framing_rule": "State plainly that nothing on file records this as the intended position, if that is the case. A high illiquid share is only a problem relative to an intention.",
+      "bound_to": "eleanor"
+    },
+    {
+      "id": "valuation-age",
+      "component": "ValuationAge",
+      "import": "@/components/portfolio-report/valuation-age",
+      "answers": "How old is each valuation, and how much money is behind the stale ones?",
+      "input": {
+        "rows": "{ name: string, value: number, valuedOn: string, iso: string, months: number }[]",
+        "thresholdMonths": "number",
+        "currency": "string"
+      },
+      "width": "medium-to-full",
+      "interactive": true,
+      "use_when": "Assets carry dated valuations of differing ages and some exceed the record's own staleness threshold.",
+      "avoid_when": "Everything is priced continuously. Cash and listed securities must be EXCLUDED — age is not a meaningful measure for them.",
+      "bound_to": "eleanor"
+    },
+    {
+      "id": "as-at-map",
+      "component": "AsAtMap",
+      "import": "@/components/portfolio-report/as-at-map",
+      "answers": "A balance sheet stated 'as at' one date is made of marks taken on many days. Which days?",
+      "input": {
+        "measured": "{ name: string, iso: string, on: string }[]",
+        "commitments": "{ name: string, iso: string, on: string }[]",
+        "asOfIso": "string",
+        "asOf": "string",
+        "thresholdMonths": "number"
+      },
+      "width": "full",
+      "use_when": "Measurement dates are spread over many months and the report's own provenance is worth showing. Belongs with basis of preparation, not with the analysis.",
+      "avoid_when": "Everything was measured on one date.",
+      "encoding_rule": "Deliberately unquantified — every tick is the same height. The subject is the SPREAD OF DATES. Encoding amounts here duplicates section 05 and buries the point.",
+      "bound_to": "eleanor"
+    },
+    {
+      "id": "liability-stack",
+      "component": "LiabilityStack",
+      "import": "@/components/portfolio-report/liability-stack",
+      "answers": "What is owed, at what rate, and secured against what?",
+      "input": {
+        "facilities": "{ name: string, lender: string|null, outstanding: number, rate: string|null, securedAgainst?: string }[]",
+        "total": "number",
+        "offBalanceSheet?": "{ label: string, value: number }",
+        "currency": "string"
+      },
+      "width": "medium-to-full",
+      "use_when": "There is borrowing. Most useful when the most expensive facility is secured against the most concentrated holding — say so.",
+      "avoid_when": "There is one liability; that is a sentence.",
+      "off_balance_sheet_rule": "Guarantees and contingent items must be shown SEPARATELY from borrowing, never summed into it.",
+      "bound_to": "prashanth"
+    },
+    {
+      "id": "event-timeline",
+      "component": "EventTimeline",
+      "import": "@/components/portfolio-report/event-timeline",
+      "answers": "What is coming, when, and what is blocked?",
+      "input": {
+        "events": "{ when: string, title: string, detail: string, status?: 'In progress'|'Pending'|'Blocked', dependsOn?: string }[]"
+      },
+      "cardinality": {
+        "min": 2,
+        "max": 8
+      },
+      "width": "medium",
+      "use_when": "Section 06, for anything dated or sequenced. `when` may be 'Undated' for items that gate others without a date.",
+      "avoid_when": "Nothing forward-looking is recorded.",
+      "detail_rule": "Use `detail` to say why the item matters or how firm the date is — 'The date is less certain than the others, so this one may move.' Not jargon."
+    },
+    {
+      "id": "dependency-flow",
+      "component": "DependencyFlow",
+      "import": "@/components/portfolio-report/dependency-flow",
+      "answers": "What is this item waiting on?",
+      "input": {
+        "dependsOn": "string"
+      },
+      "width": "inline",
+      "use_when": "Inline within a timeline entry or a finding, when one item cannot start until another completes.",
+      "avoid_when": "The dependency is obvious from order."
+    },
+    {
+      "id": "decision-list",
+      "component": "DecisionList",
+      "import": "@/components/portfolio-report/decision-list",
+      "answers": "What does the reader have to decide, and on what basis?",
+      "input": {
+        "decisions": "{ question: string, basis: string, owner?: string, evidence?: ReactNode }[]"
+      },
+      "cardinality": {
+        "min": 2,
+        "max": 6
+      },
+      "width": "narrow (max-w-[760px])",
+      "use_when": "Section 07. Every entry must be a real question with a real basis drawn from earlier in the report.",
+      "avoid_when": "You would have to invent the basis. A decision without a basis is filler.",
+      "phrasing_rule": "`question` is phrased as a question. `basis` cites the finding, not the opinion."
+    },
+    {
+      "id": "decision-order",
+      "component": "DecisionOrder",
+      "import": "@/components/portfolio-report/decision-order",
+      "answers": "In what order must these decisions be taken?",
+      "input": {
+        "steps": "{ label: string, note?: string, blockedBy?: string }[]"
+      },
+      "width": "narrow-to-medium",
+      "use_when": "Decisions genuinely gate one another, so order is itself information.",
+      "avoid_when": "The decisions are independent. Then DecisionList alone is enough and this adds false structure.",
+      "bound_to": "prashanth"
+    },
+    {
+      "id": "action-ownership",
+      "component": "ActionOwnership",
+      "import": "@/components/portfolio-report/action-ownership",
+      "answers": "Who owns each open action, and what has no owner?",
+      "input": {
+        "actions": "{ text: string, owner: string|null, due: string|null }[]"
+      },
+      "width": "narrow-to-medium",
+      "use_when": "Open actions are recorded and some lack an owner or a date. The unowned ones are the point.",
+      "avoid_when": "Every action is owned and dated — then a plain list is enough.",
+      "bound_to": "prashanth"
+    },
+    {
+      "id": "data-limitation",
+      "component": "DataLimitation",
+      "import": "@/components/portfolio-report/data-limitation",
+      "answers": "What can this report not tell you, and why?",
+      "input": {
+        "title": "string",
+        "children": "ReactNode"
+      },
+      "width": "inherits",
+      "use_when": "A question the reader would reasonably ask cannot be answered from the record. Place it where that question arises, not in an appendix.",
+      "avoid_when": "The data exists. Do not use it to hedge.",
+      "tone_rule": "INFORMATIONAL, never alarming. No red, no warning iconography, no alert styling. A missing performance history is a fact about the record, not an error.",
+      "title_rule": "The title states the limitation as a plain fact: 'There is no performance history on file'. Not 'Data Gap', not 'Limitation'."
+    },
+    {
+      "id": "return-attribution",
+      "component": "ReturnAttribution",
+      "import": "@/components/portfolio-report/return-attribution",
+      "answers": "What helped and what hurt, when the drivers straddle zero?",
+      "input": {
+        "rows": "{ name: string, pp: number }[]  // pp = PERCENTAGE POINTS, signed"
+      },
+      "cardinality": {
+        "min": 4,
+        "max": 10
+      },
+      "width": "full",
+      "use_when": "Section 03, when the source gives signed per-sleeve contributions and at least one is negative. This is the diverging sibling of ContributionAnalysis: it draws a zero line, which is the whole point when half the lines are drags.",
+      "avoid_when": "Every contribution is positive - use ContributionAnalysis, which draws no zero line because there is nothing to straddle. Also avoid if the figures are standalone returns rather than contributions, unless you say in the caption that the reading is inferred.",
+      "chart_rule": "Two tones only: foreground for gains, a mid tone for drags. Direction and the printed sign already encode which is which, so a third channel (red/green) adds nothing. No x-axis: every bar carries its own figure.",
+      "reconciliation_rule": "If the lines are presented as contributions to a stated total, sum them and print the sum in the caption. Where it does not reconcile, state the gap in the caption or a DataLimitation. Do NOT scale the lines to force a match.",
+      "degrade_to": "A two-line Narrative naming the largest positive and the largest negative."
+    },
+    {
+      "id": "concentration-shift",
+      "component": "ConcentrationShift",
+      "import": "@/components/portfolio-report/concentration-shift",
+      "answers": "How big is this exposure, and how far has it moved?",
+      "input": {
+        "label": "string",
+        "from": "number  // percent of the whole, 0-100",
+        "to": "number",
+        "fromLabel": "string",
+        "toLabel": "string",
+        "remainderLabel": "string  // what the unfilled part of the track is"
+      },
+      "cardinality": {
+        "min": 1,
+        "max": 2
+      },
+      "width": "narrow - pair it with Narrative at grid-cols-[minmax(0,26rem)_minmax(0,1fr)]",
+      "use_when": "Section 05, for ONE weight where the source gives a prior value and a current value and nothing else. The track is the whole portfolio, so the reader sees the weight in proportion and sees that the remainder is unbroken-down.",
+      "avoid_when": "A policy band is stated - use TargetRange, which can show the breach. Five or more periods exist - use ExposureTrend. More than two exposures moved - use ChangeLedger.",
+      "hard_rule": "This is NOT Progress and must not be swapped for it. There is no target and no completion; a progress bar would assert that the current weight is a fraction of a goal the record does not state.",
+      "degrade_to": "A Figures pair, or one sentence in Narrative if only the current weight is known."
+    },
+    {
+      "id": "liquidity-cover",
+      "component": "LiquidityCover",
+      "import": "@/components/portfolio-report/liquidity-cover",
+      "answers": "Does the money on hand cover what it has been promised to?",
+      "input": {
+        "sources": "{ name: string, amount: number, detail: string }[]",
+        "uses": "{ name: string, amount: number, detail: string }[]",
+        "sourcesLabel": "string",
+        "usesLabel": "string",
+        "remainderLabel": "string",
+        "remainderNote": "string",
+        "format": "(amount: number) => string  // server component, so a function prop is fine"
+      },
+      "cardinality": {
+        "min": 1,
+        "max": 1
+      },
+      "width": "full",
+      "use_when": "Section 05, when the source states both what is available and what it is committed to inside a defined window. Two bars on one scale, so the answer is a difference in length rather than a subtraction the reader performs.",
+      "avoid_when": "Only one side is known - there is nothing to compare, so use Figures. A client-stated cash floor exists and the question is months of cover rather than one purchase - use LiquidityLadder.",
+      "scale_rule": "Both bars share one scale and segments are drawn to true proportion. A segment that is 1% of the bar stays 1% of the bar; say in the caption that it is small rather than enlarging it to be legible.",
+      "precision_rule": "Use a formatter precise enough that the two totals minus each other equals the printed remainder. Rounding to one decimal will show 3.2 - 3.0 beside a remainder of 158k.",
+      "degrade_to": "A single Figures showing the shortfall or surplus."
+    }
+  ],
+  "primitives": {
+    "note": "From components/portfolio-report/chapter.tsx and components/ui/*. These carry the rhythm. Use shadcn as primitives, not as the design.",
+    "Chapter": "A section. Renders a Separator above, then a mono number and an uppercase tracked title. Not a container — no border, no background, no shadow.",
+    "Narrative": "Reading text at max-w-[62ch], text-[0.9375rem], leading-[1.7]. Wrap every paragraph in this. Never put a Card around a paragraph.",
+    "Figure": "An exhibit with optional label, title and note. The TITLE should state the finding, not name the chart: 'The same holdings, cut four ways', 'His largest single asset is not in his own name'. Never 'Allocation Chart'.",
+    "Figures": "A row of value/label pairs beneath an exhibit. tone: 'default' | 'muted'.",
+    "Eyebrow": "A small uppercase label above a figure or statement.",
+    "Separator": "THE PRIMARY TOOL FOR RHYTHM AND BOUNDARIES. Use it between chapters (mb-6) and between findings inside section 05 (my-16). Reach for a separator before reaching for a container.",
+    "Badge": "True statuses only — 'Revaluation', 'Approved', 'Pending', 'Blocked'. Never a severity, a category, a mood or a decoration. Do not turn labels into badges.",
+    "Alert": "Real data limitations only, and prefer DataLimitation. Never for emphasis.",
+    "Progress": "Simple zero-to-value progress ONLY. Never for a target range — use TargetRange.",
+    "Card": "Use sparingly. NOT the default wrapper. Never a card around every paragraph or every chart. Most exhibits need no container at all.",
+    "Table": "Comparable rows only. Do not force unlike items into a table because the component exists.",
+    "Tooltip_Collapsible_ToggleGroup": "For genuine interaction: alternate cuts of the same data, per-point detail. Not for hiding content the reader needs."
+  },
+  "charts": {
+    "library": "recharts, via the existing shadcn chart primitives. Do not add another chart library.",
+    "required_primitives": [
+      "ChartContainer",
+      "ChartTooltip",
+      "ChartTooltipContent",
+      "ChartLegend",
+      "ChartLegendContent"
+    ],
+    "config": "Every chart declares a `satisfies ChartConfig` object with a human label per series.",
+    "color_budget": {
+      "rule": "One colour by default. A chart does not get five colours because five chart tokens exist.",
+      "reason": "--chart-1 through --chart-5 in this preset are a monochrome olive ramp, identical in :root and .dark, so they do not reliably distinguish series.",
+      "technique": "Derive steps with color-mix(in oklab, var(--foreground) N%, var(--background)). Use var(--foreground) for the primary series and a lower percentage for the secondary.",
+      "hairlines": "var(--border) is effectively invisible on white. Use var(--foreground) at low opacity (border-foreground/20 to /25).",
+      "gradients": "No gradients unless the gradient encodes a quantity. Flat fills at low opacity instead (fillOpacity around 0.07)."
+    },
+    "animation": "isAnimationActive={false} unless motion carries meaning.",
+    "nulls": "Unobserved periods are null and must render as gaps. Never interpolate across a period you did not measure."
+  },
+  "composition_rules": {
+    "width_rhythm": {
+      "rule": "WIDTH MUST VARY DOWN THE PAGE. This is not decorative; it is how the reader tells narrative from analysis.",
+      "target_sequence": "narrow narrative -> wider analytical exhibit -> narrative -> full-width exhibit -> compact table -> narrative",
+      "page_shell": "article mx-auto max-w-[1100px] px-6 py-16 sm:px-10 lg:py-24",
+      "measures": {
+        "reading": "max-w-[62ch] (Narrative)",
+        "headline": "max-w-[32ch] at text-[2rem] (section 01 opener)",
+        "finding_heading": "max-w-[46ch] at text-2xl (section 05 h3)",
+        "constrained_exhibit": "max-w-[880px] / max-w-[900px]",
+        "closing": "max-w-[760px] (section 07)"
+      },
+      "split_layouts": [
+        "grid-cols-[minmax(0,1fr)_minmax(0,20rem)] — exhibit with a narrow sidebar",
+        "grid-cols-[minmax(0,1.15fr)_minmax(0,1fr)] — exhibit against narrative",
+        "grid-cols-[minmax(0,26rem)_minmax(0,1fr)] — narrow exhibit, wide narrative",
+        "grid-cols-[minmax(0,32rem)_minmax(0,1fr)] — timeline with commentary"
+      ],
+      "alignment_note": "When an exhibit sits beside a headline, align its top edge to the HEADLINE, not to the narrative below it. Use lg:items-start, or items-end when the pair should share a baseline."
+    },
+    "one_finding_per_exhibit": "Each exhibit makes one point, stated in its Figure title. If an exhibit needs two sentences to explain what it shows, split it or drop it.",
+    "budget_per_section": {
+      "exhibits": "1-3",
+      "note": "Section 04 and 05 may carry more, but each must earn it with a distinct finding."
+    },
+    "no_repeated_layout": "If two consecutive sections have the same internal structure, change one. Identical layouts are what makes a report read as generated.",
+    "prose_to_visual_ratio": "Favour visual elements over long prose. Narrative exists to connect exhibits and state what a number means — not to restate the exhibit."
+  },
+  "data_rules": {
+    "never_invent": [
+      "performance figures",
+      "benchmark values",
+      "target allocations or policy limits",
+      "tax data",
+      "cost basis",
+      "historical values",
+      "valuation dates",
+      "fund look-through composition",
+      "dates of conversations"
+    ],
+    "unavailable_data": "If data is unavailable and the component can still work without it, SIMPLIFY THE COMPONENT. Do not fill the gap.",
+    "synthetic_values": {
+      "rule": "If a visualisation genuinely needs synthetic values for a visual reference, put them in ONE clearly named fixture (e.g. portfolio-report-demo-data.ts), label them demo-only in code, and render the disclosure on the page.",
+      "prohibition": "Do NOT scatter fake values across components.",
+      "reference": "The reference build has exactly one such constant: an illustrative technology band, because the record states no policy limit. Its disclosure renders beside the exhibit."
+    },
+    "provenance": {
+      "rule": "Tag every figure RECORDED, CONVERTED, DERIVED or ESTIMATED, and carry the tag through to the page where the distinction matters to the reader.",
+      "conversion": "State the FX rates used. Use fixed rates so two runs agree.",
+      "estimates": "An estimate must be anchored to something the record actually states, and must reconcile to it."
+    },
+    "unresolved_facts": "Where the record contradicts itself or omits an attribution, record it as a conflict or as unstated. Do not resolve it silently to make the figures tidy."
+  },
+  "prohibitions": {
+    "reason": "These are the patterns that make a report read as machine-generated. Treat as hard constraints.",
+    "visual": [
+      "decorative gradients",
+      "glows",
+      "glassmorphism",
+      "excessive rounded cards",
+      "a card around every paragraph or chart",
+      "pastel blocks",
+      "giant icon tiles",
+      "sparkles or magic-wand iconography",
+      "'AI INSIGHT' badges",
+      "excessive pills",
+      "dotted decorative backgrounds",
+      "unnecessary animation",
+      "fake futuristic styling",
+      "excessive accent colours",
+      "charts with six unnecessary colours",
+      "dashboard-style KPI grids",
+      "generic SaaS admin-dashboard composition",
+      "red warning boxes where there is no error"
+    ],
+    "structural": [
+      "generic abstractions — FancyCard, DataBox, ChartBlock, InsightCard",
+      "Card as the default wrapper",
+      "labels rendered as buttons",
+      "seven identically-laid-out sections",
+      "Progress used for a target range",
+      "forcing unusual information into Card, Table or Chart because those components exist"
+    ],
+    "editorial": [
+      "chapter titles that describe the analysis process rather than the content",
+      "Figure titles that name the chart type instead of stating the finding",
+      "jargon where a plain word exists",
+      "'Why this matters' as a heading",
+      "cross-references by section number in prose",
+      "meta-commentary about the report itself"
+    ],
+    "keep_these_words": {
+      "note": "There is a line between jargon and the real name of a thing. These are the real names and should NOT be simplified away.",
+      "list": [
+        "capital call",
+        "uncalled",
+        "look-through",
+        "benchmark",
+        "mandate",
+        "custody statement",
+        "cost basis",
+        "unrealised"
+      ]
+    }
+  },
+  "selection_procedure": {
+    "note": "Run per fact, in order. Stop at the first step that resolves.",
+    "steps": [
+      "1. Classify the fact: is it a STATE (what is true now), a CHANGE (what moved), a MEASURE (a return), an INVENTORY (what is held), a RISK (what is wrong), a SCHEDULE (what is dated), or a DECISION (what to do)? This maps to sections 01/02/03/04/05/06/07 respectively.",
+      "2. Check completeness against the candidate component's `input`. If a required field is absent from the record, do NOT fill it — go to step 5.",
+      "3. Check `cardinality`. Below the minimum, the component misrepresents the data; use `degrade_to`.",
+      "4. Check `avoid_when`. If it matches, take the alternative named there.",
+      "5. If nothing fits, apply `unmapped_fallback`.",
+      "6. Once selected, assign a width from composition_rules.width_rhythm that DIFFERS from the previous element in the section.",
+      "7. Write the Figure title as the finding, in a full sentence where it reads naturally.",
+      "8. Re-check the section: does it now have more than three exhibits, or the same layout as the previous section? If so, cut."
+    ],
+    "tie_breaker": "Prefer the component that needs the least explanation. If two fit equally, prefer the one already used less in this report — but never repeat a layout to achieve variety.",
+    "unmapped_fallback": {
+      "order": [
+        "State it in Narrative as a sentence. Most facts belong here.",
+        "Add it as `detail` or `note` on an exhibit that already exists.",
+        "If it is a question the reader would ask and the record cannot answer, render DataLimitation.",
+        "Drop it. Minimalism is the default; when unsure, REMOVE rather than ADD."
+      ],
+      "prohibition": "Never invent a new generic container to hold an unmapped fact."
+    }
+  },
+  "output_contract": {
+    "note": "Shape the selection model should emit. One object per report; the renderer walks it.",
+    "schema": {
+      "client": "string",
+      "asOf": "string (ISO)",
+      "displayCurrency": "string",
+      "fx": "{ [code: string]: number } | null",
+      "percentConvention": "'points' | 'fraction'",
+      "sections": [
+        {
+          "id": "string  // '01'..'07', contiguous",
+          "title": "string  // plain words, reader's point of view",
+          "headline": "string | null  // section 01 only",
+          "blocks": [
+            {
+              "kind": "'narrative' | 'exhibit' | 'metrics' | 'limitation'",
+              "component": "string | null  // a `component` value from components[]",
+              "figureTitle": "string | null  // the finding, not the chart name",
+              "note": "string | null",
+              "width": "'inline' | 'narrow' | 'medium' | 'full'",
+              "layout": "string | null  // a value from composition_rules.width_rhythm.split_layouts",
+              "props": "object  // must satisfy the component's `input`",
+              "provenance": "'RECORDED' | 'CONVERTED' | 'DERIVED' | 'ESTIMATED'",
+              "text": "string | null  // narrative and limitation blocks only"
+            }
+          ]
+        }
+      ],
+      "sources": "{ name: string, detail: string }[]",
+      "dropped": "{ fact: string, reason: string }[]  // facts deliberately not rendered — keep this honest, it is how reviewers audit the omissions"
+    }
+  },
+  "worked_examples": [
+    {
+      "fact": "NVIDIA is 14.2% of a 25.22m listed book and is held at four custodians.",
+      "reasoning": "A RISK (section 05). Concentration with no stated policy limit -> ConcentrationRisk, not TargetRange. The four-custodian split is a second, different point, so it gets its own exhibit: ExposureLens, because the finding is that no single cut shows the whole position.",
+      "output": "Two blocks in section 05. h3: 'Technology is 56.6% of his listed holdings, and nobody decided that'. First exhibit ConcentrationRisk at medium width; separator; ExposureLens at full width."
+    },
+    {
+      "fact": "Securities are worth 16.4m against a cost of 15.45m. There is no monthly series and no benchmark.",
+      "reasoning": "A MEASURE (section 03), but PerformanceVsBenchmark's input cannot be satisfied and must not be synthesised. Fall through to CostToMarket plus DataLimitation.",
+      "output": "Section 03 becomes the shortest in the report. DataLimitation titled 'There is no performance history on file', then CostToMarket. The +6.1% is labelled return on cost with no holding period, never an annual return."
+    },
+    {
+      "fact": "Net worth rose 2.18m since June, and 13 August revaluation of nine private holdings accounts for almost all of it.",
+      "reasoning": "A CHANGE (section 02). ChangeLedger, status 'Revaluation'. The note must separate revaluation from return — this is the rule in section 02.",
+      "output": "One ChangeLedger row: label 'Private investments', from 'US$1.6m', to 'US$2.4m', status 'Revaluation', note explaining it is a revaluation and not a return."
+    },
+    {
+      "fact": "The client asked to keep at least 7m accessible. Cash is 11m; 6.95m of payments fall between October and January.",
+      "reasoning": "A RISK (section 05) with a STATED floor, so LiquidityLadder qualifies — the reference line is legitimate because the client set it.",
+      "output": "h3: 'Cash drops below the minimum she set herself at the first capital call, and never recovers'. LiquidityLadder at full width, step interpolation, one reference line, medium-confidence dates flagged in the tooltip."
+    },
+    {
+      "fact": "The client's date of birth is not in the record.",
+      "reasoning": "No component needs it and nothing is improved by guessing. Falls to unmapped_fallback step 4.",
+      "output": "Dropped, and recorded in `dropped` with reason 'not in record'."
+    },
+    {
+      "input": "A one-page review note: a total, a change, eight signed attribution lines, three changes, five recommendations, five action items. No holdings, no cost basis, no benchmark, no dates, no client name.",
+      "selection": "01 ReadoutMetrics + Narrative; 02 ChangeLedger; 03 ReturnAttribution + DataLimitation; 05 ConcentrationShift + LiquidityCover; 06 EventTimeline; 07 DecisionList. Section 04 dropped, then 05/06/07 renumbered to 04/05/06.",
+      "reasoning": "Every section that survived is one the note carries evidence for. The note contradicts itself in its two most prominent figures - an amount and a percentage that do not agree, and attribution lines that fall 0.13pp short of the stated change - so both appear in a DataLimitation at the point a reader would rely on them, unresolved. Choosing the more plausible figure would have produced a cleaner page and a false one.",
+      "closing_disclosure": "Because six of the usual seven sections ran, the report ends with an enumerated list of what the source does not contain. That list is what makes the omission of section 04 a statement rather than a gap.",
+      "reference": "app/lab/portfolio-report/review"
+    }
+  ],
+  "final_review": {
+    "note": "Run against the RENDERED page, not the code. Compiling is not passing. A compile-clean page still failed six rounds of copy review in the reference build, because the same concept appeared under different words in components and in prose — only reading the rendered output caught it.",
+    "checklist": [
+      "Does any section look like a SaaS dashboard? Simplify it.",
+      "Is every Figure title a finding rather than a chart name?",
+      "Does width actually vary down the page, or does everything sit at one measure?",
+      "Do any two consecutive sections share a layout?",
+      "Is there a Card that is doing nothing a Separator could do better?",
+      "Does any chart use more than one colour without a reason?",
+      "Is every Badge a true status?",
+      "Is any number on the page absent from the record and absent from the demo fixture?",
+      "Does any label use jargon where a plain word exists? Read the labels out loud.",
+      "Could anything be removed without loss? If yes, remove it."
+    ],
+    "default": "Minimalism. When unsure, REMOVE something rather than ADD something."
+  }
+}

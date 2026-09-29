@@ -1,0 +1,941 @@
+{
+  "full_name": "Prashanth Ranganathan",
+  "date_of_birth": "1978-12-06",
+  "gender": "Male",
+  "base_currency": "USD",
+  "primary_tax_jurisdiction": "SG",
+  "nationality": "AU",
+  "citizenships": [
+    "AU"
+  ],
+  "segment": "uhnw",
+  "client_since": "2018-01-10",
+  "family": [
+    {
+      "full_name": "Tara Ranganathan",
+      "date_of_birth": "1981-08-03",
+      "gender": "Female",
+      "nationality": "US",
+      "citizenships": [
+        "US"
+      ],
+      "relationship": "spouse"
+    },
+    {
+      "full_name": "Nandan Ranganathan",
+      "date_of_birth": "2012-02-25",
+      "gender": "Male",
+      "nationality": "AU",
+      "citizenships": [
+        "AU",
+        "US"
+      ],
+      "relationship": "child"
+    },
+    {
+      "full_name": "Niya Ranganathan",
+      "date_of_birth": "2014-10-15",
+      "gender": "Female",
+      "nationality": "AU",
+      "citizenships": [
+        "AU",
+        "US"
+      ],
+      "relationship": "child"
+    }
+  ],
+  "companies": [
+    {
+      "name": "Tara Ranganathan Living Trust",
+      "entity_type": "Living Trust",
+      "jurisdiction": "US",
+      "party_type": "trust",
+      "relationship": "beneficiary",
+      "holds_assets": [
+        {
+          "name": "385 Fletcher Drive, Atherton, California",
+          "asset_type": "REAL_ESTATE",
+          "currency": "USD",
+          "market_value": "12800000",
+          "cost_value": "8500000"
+        }
+      ]
+    },
+    {
+      "name": "PRTR",
+      "entity_type": "Company / Family Office Vehicle",
+      "jurisdiction": "SG",
+      "relationship": "ubo"
+    }
+  ],
+  "bank_accounts": [
+    {
+      "institution": "DBS Bank",
+      "jurisdiction": "Singapore",
+      "currency": "SGD",
+      "balance": "770000",
+      "key": "prashanth_ranganathan_dbs_bank_singapore",
+      "historical_balances": {
+        "2026-06-28": "759220.00",
+        "2026-07-13": "764610.00",
+        "2026-07-28": "773080.00",
+        "2026-08-13": "768460.00",
+        "2026-08-20": "771540.00",
+        "2026-08-27": "770000.00"
+      }
+    },
+    {
+      "institution": "Emirates NBD",
+      "jurisdiction": "United Arab Emirates",
+      "currency": "USD",
+      "balance": "440000",
+      "key": "prashanth_ranganathan_emirates_nbd_united_arab_emirates",
+      "historical_balances": {
+        "2026-06-28": "433840.00",
+        "2026-07-13": "436920.00",
+        "2026-07-28": "441760.00",
+        "2026-08-13": "439120.00",
+        "2026-08-20": "440880.00",
+        "2026-08-27": "440000.00"
+      }
+    },
+    {
+      "institution": "HSBC",
+      "jurisdiction": "India",
+      "currency": "INR",
+      "balance": "9000000",
+      "key": "prashanth_ranganathan_hsbc_india",
+      "historical_balances": {
+        "2026-06-28": "8874000.00",
+        "2026-07-13": "8937000.00",
+        "2026-07-28": "9036000.00",
+        "2026-08-13": "8982000.00",
+        "2026-08-20": "9018000.00",
+        "2026-08-27": "9000000.00"
+      }
+    },
+    {
+      "institution": "HSBC (GIFT City)",
+      "jurisdiction": "India",
+      "currency": "INR",
+      "balance": "5600000",
+      "key": "prashanth_ranganathan_hsbc_gift_city_india",
+      "historical_balances": {
+        "2026-06-28": "5521600.00",
+        "2026-07-13": "5560800.00",
+        "2026-07-28": "5622400.00",
+        "2026-08-13": "5588800.00",
+        "2026-08-20": "5611200.00",
+        "2026-08-27": "5600000.00"
+      }
+    }
+  ],
+  "brokerage_accounts": [
+    {
+      "institution": "Interactive Brokers",
+      "jurisdiction": "Singapore",
+      "currency": "USD",
+      "holdings": [
+        {
+          "symbol": "VOO",
+          "name": "Vanguard S&P 500 ETF",
+          "venue": "nyse",
+          "price": "545.20",
+          "market_value": "2280000",
+          "cost_basis": "1680000",
+          "asset_type": "etf"
+        },
+        {
+          "symbol": "AAPL",
+          "name": "Apple Inc.",
+          "venue": "nasdaq",
+          "price": "228.50",
+          "market_value": "1425000",
+          "cost_basis": "1050000",
+          "asset_type": "equity"
+        },
+        {
+          "symbol": "MSFT",
+          "name": "Microsoft Corp.",
+          "venue": "nasdaq",
+          "price": "430.10",
+          "market_value": "1140000",
+          "cost_basis": "840000",
+          "asset_type": "equity"
+        },
+        {
+          "symbol": "NVDA",
+          "name": "NVIDIA Corp.",
+          "venue": "nasdaq",
+          "price": "135.40",
+          "market_value": "855000",
+          "cost_basis": "630000",
+          "asset_type": "equity"
+        },
+        {
+          "symbol": "SGOV",
+          "name": "iShares 0-3 Month Treasury Bond ETF",
+          "venue": "nasdaq",
+          "price": "100.40",
+          "market_value": "250000",
+          "cost_basis": "250000",
+          "asset_type": "etf"
+        }
+      ],
+      "key": "prashanth_ranganathan_interactive_brokers_singapore"
+    },
+    {
+      "institution": "LGT Bank",
+      "jurisdiction": "Singapore",
+      "currency": "USD",
+      "holdings": [
+        {
+          "symbol": "VOO",
+          "name": "Vanguard S&P 500 ETF",
+          "venue": "nyse",
+          "price": "545.20",
+          "market_value": "3360000",
+          "cost_basis": "2800000",
+          "asset_type": "etf"
+        },
+        {
+          "symbol": "AAPL",
+          "name": "Apple Inc.",
+          "venue": "nasdaq",
+          "price": "228.50",
+          "market_value": "2100000",
+          "cost_basis": "1750000",
+          "asset_type": "equity"
+        },
+        {
+          "symbol": "MSFT",
+          "name": "Microsoft Corp.",
+          "venue": "nasdaq",
+          "price": "430.10",
+          "market_value": "1680000",
+          "cost_basis": "1400000",
+          "asset_type": "equity"
+        },
+        {
+          "symbol": "NVDA",
+          "name": "NVIDIA Corp.",
+          "venue": "nasdaq",
+          "price": "135.40",
+          "market_value": "1260000",
+          "cost_basis": "1050000",
+          "asset_type": "equity"
+        },
+        {
+          "symbol": "SGOV",
+          "name": "iShares 0-3 Month Treasury Bond ETF",
+          "venue": "nasdaq",
+          "price": "100.40",
+          "market_value": "560000",
+          "cost_basis": "560000",
+          "asset_type": "etf"
+        }
+      ],
+      "key": "prashanth_ranganathan_lgt_bank_singapore"
+    },
+    {
+      "institution": "Goldman Sachs",
+      "jurisdiction": "United States",
+      "currency": "USD",
+      "holdings": [
+        {
+          "symbol": "VOO",
+          "name": "Vanguard S&P 500 ETF",
+          "venue": "nyse",
+          "price": "545.20",
+          "market_value": "1400000",
+          "cost_basis": "1120000",
+          "asset_type": "etf"
+        },
+        {
+          "symbol": "AAPL",
+          "name": "Apple Inc.",
+          "venue": "nasdaq",
+          "price": "228.50",
+          "market_value": "875000",
+          "cost_basis": "700000",
+          "asset_type": "equity"
+        },
+        {
+          "symbol": "MSFT",
+          "name": "Microsoft Corp.",
+          "venue": "nasdaq",
+          "price": "430.10",
+          "market_value": "700000",
+          "cost_basis": "560000",
+          "asset_type": "equity"
+        },
+        {
+          "symbol": "NVDA",
+          "name": "NVIDIA Corp.",
+          "venue": "nasdaq",
+          "price": "135.40",
+          "market_value": "525000",
+          "cost_basis": "420000",
+          "asset_type": "equity"
+        },
+        {
+          "symbol": "SGOV",
+          "name": "iShares 0-3 Month Treasury Bond ETF",
+          "venue": "nasdaq",
+          "price": "100.40",
+          "market_value": "190000",
+          "cost_basis": "190000",
+          "asset_type": "etf"
+        }
+      ],
+      "key": "prashanth_ranganathan_goldman_sachs_united_states"
+    },
+    {
+      "institution": "UBS",
+      "jurisdiction": "Singapore",
+      "currency": "USD",
+      "holdings": [
+        {
+          "symbol": "VOO",
+          "name": "Vanguard S&P 500 ETF",
+          "venue": "nyse",
+          "price": "545.20",
+          "market_value": "2480000",
+          "cost_basis": "2080000",
+          "asset_type": "etf"
+        },
+        {
+          "symbol": "AAPL",
+          "name": "Apple Inc.",
+          "venue": "nasdaq",
+          "price": "228.50",
+          "market_value": "1550000",
+          "cost_basis": "1300000",
+          "asset_type": "equity"
+        },
+        {
+          "symbol": "MSFT",
+          "name": "Microsoft Corp.",
+          "venue": "nasdaq",
+          "price": "430.10",
+          "market_value": "1240000",
+          "cost_basis": "1040000",
+          "asset_type": "equity"
+        },
+        {
+          "symbol": "NVDA",
+          "name": "NVIDIA Corp.",
+          "venue": "nasdaq",
+          "price": "135.40",
+          "market_value": "930000",
+          "cost_basis": "780000",
+          "asset_type": "equity"
+        },
+        {
+          "symbol": "SGOV",
+          "name": "iShares 0-3 Month Treasury Bond ETF",
+          "venue": "nasdaq",
+          "price": "100.40",
+          "market_value": "420000",
+          "cost_basis": "420000",
+          "asset_type": "etf"
+        }
+      ],
+      "key": "prashanth_ranganathan_ubs_singapore"
+    }
+  ],
+  "real_estate": [
+    {
+      "address": "101 Dalvey Road, Apt 0201, Singapore",
+      "property_type": "Residential",
+      "country": "SG",
+      "purchase_price": "8400000",
+      "current_value": "10200000",
+      "currency": "SGD",
+      "purchase_date": "2020-09-01",
+      "key": "prashanth_ranganathan_101_dalvey_road_apt_0201_singapore",
+      "historical_valuations": {
+        "2026-06-28": "10047000.00",
+        "2026-07-28": "10118400.00",
+        "2026-08-27": "10200000.00"
+      }
+    }
+  ],
+  "private_investments": [
+    {
+      "name": "Acme Technologies",
+      "jurisdiction": "US",
+      "amount": "500000",
+      "key": "prashanth_ranganathan_acme_technologies",
+      "historical_valuations": {
+        "2026-06-28": "325000.00",
+        "2026-07-28": "325000.00",
+        "2026-08-13": "500000.00",
+        "2026-08-27": "500000.00"
+      }
+    },
+    {
+      "name": "I Own My Data",
+      "jurisdiction": "US",
+      "amount": "200000",
+      "key": "prashanth_ranganathan_i_own_my_data",
+      "historical_valuations": {
+        "2026-06-28": "130000.00",
+        "2026-07-28": "130000.00",
+        "2026-08-13": "200000.00",
+        "2026-08-27": "200000.00"
+      }
+    },
+    {
+      "name": "Harmony",
+      "jurisdiction": "IN",
+      "amount": "150000",
+      "key": "prashanth_ranganathan_harmony",
+      "historical_valuations": {
+        "2026-06-28": "97500.00",
+        "2026-07-28": "97500.00",
+        "2026-08-13": "150000.00",
+        "2026-08-27": "150000.00"
+      }
+    },
+    {
+      "name": "Kiwi",
+      "jurisdiction": "IN",
+      "amount": "300000",
+      "key": "prashanth_ranganathan_kiwi",
+      "historical_valuations": {
+        "2026-06-28": "195000.00",
+        "2026-07-28": "195000.00",
+        "2026-08-13": "300000.00",
+        "2026-08-27": "300000.00"
+      }
+    },
+    {
+      "name": "Upswing Technologies",
+      "jurisdiction": "IN",
+      "amount": "100000",
+      "key": "prashanth_ranganathan_upswing_technologies",
+      "historical_valuations": {
+        "2026-06-28": "65000.00",
+        "2026-07-28": "65000.00",
+        "2026-08-13": "100000.00",
+        "2026-08-27": "100000.00"
+      }
+    },
+    {
+      "name": "XWeave",
+      "jurisdiction": "SG",
+      "amount": "400000",
+      "key": "prashanth_ranganathan_xweave",
+      "historical_valuations": {
+        "2026-06-28": "260000.00",
+        "2026-07-28": "260000.00",
+        "2026-08-13": "400000.00",
+        "2026-08-27": "400000.00"
+      }
+    },
+    {
+      "name": "Kshana",
+      "jurisdiction": "US",
+      "amount": "250000",
+      "key": "prashanth_ranganathan_kshana",
+      "historical_valuations": {
+        "2026-06-28": "162500.00",
+        "2026-07-28": "162500.00",
+        "2026-08-13": "250000.00",
+        "2026-08-27": "250000.00"
+      }
+    },
+    {
+      "name": "Strong Keep",
+      "jurisdiction": "SG",
+      "amount": "160000",
+      "key": "prashanth_ranganathan_strong_keep",
+      "historical_valuations": {
+        "2026-06-28": "104000.00",
+        "2026-07-28": "104000.00",
+        "2026-08-13": "160000.00",
+        "2026-08-27": "160000.00"
+      }
+    },
+    {
+      "name": "Trade Together",
+      "jurisdiction": "SG",
+      "amount": "350000",
+      "key": "prashanth_ranganathan_trade_together",
+      "historical_valuations": {
+        "2026-06-28": "227500.00",
+        "2026-07-28": "227500.00",
+        "2026-08-13": "350000.00",
+        "2026-08-27": "350000.00"
+      }
+    }
+  ],
+  "digital_assets": [
+    {
+      "name": "Bitcoin (Sygnum Custody)",
+      "market_value": "2400000",
+      "cost_value": "360000",
+      "currency": "USD",
+      "key": "prashanth_ranganathan_bitcoin_sygnum_custody"
+    },
+    {
+      "name": "Ethereum",
+      "market_value": "900000",
+      "cost_value": "240000",
+      "currency": "USD",
+      "key": "prashanth_ranganathan_ethereum"
+    },
+    {
+      "name": "Solana (Staked)",
+      "market_value": "170000",
+      "cost_value": "60000",
+      "currency": "USD",
+      "key": "prashanth_ranganathan_solana_staked"
+    }
+  ],
+  "vehicles": [
+    {
+      "name": "BMW iX xDrive50",
+      "description": "Electric SUV, registered Singapore",
+      "market_value": "250000",
+      "cost_value": "336000",
+      "currency": "SGD",
+      "key": "prashanth_ranganathan_bmw_ix_xdrive50"
+    },
+    {
+      "name": "Porsche 911 Turbo S",
+      "description": "Sports car, garaged Melbourne",
+      "market_value": "760000",
+      "cost_value": "840000",
+      "currency": "AUD",
+      "key": "prashanth_ranganathan_porsche_911_turbo_s"
+    },
+    {
+      "name": "Princess V50 Yacht",
+      "description": "Moored at ONE°15 Marina, Sentosa",
+      "market_value": "3600000",
+      "cost_value": "4400000",
+      "currency": "USD",
+      "key": "prashanth_ranganathan_princess_v50_yacht"
+    }
+  ],
+  "intellectual_property": [],
+  "collections": [
+    {
+      "name": "Southeast Asian Art Collection",
+      "description": "Contemporary artists, 12 pieces",
+      "market_value": "1700000",
+      "cost_value": "840000",
+      "currency": "USD",
+      "key": "prashanth_ranganathan_southeast_asian_art_collection"
+    },
+    {
+      "name": "Watch Collection",
+      "description": "Patek Philippe, Audemars Piguet — 6 pieces",
+      "market_value": "640000",
+      "cost_value": "560000",
+      "currency": "USD",
+      "key": "prashanth_ranganathan_watch_collection"
+    }
+  ],
+  "other_personal": [
+    {
+      "name": "Wine Cellar",
+      "description": "Bordeaux and Burgundy, ~400 bottles",
+      "market_value": "360000",
+      "cost_value": "190000",
+      "currency": "USD",
+      "key": "prashanth_ranganathan_wine_cellar"
+    },
+    {
+      "name": "Household Furnishings (Singapore)",
+      "description": "Primary residence furnishings",
+      "market_value": null,
+      "cost_value": "500000",
+      "currency": "SGD",
+      "key": "prashanth_ranganathan_household_furnishings_singapore"
+    }
+  ],
+  "liabilities": [
+    {
+      "name": "DBS Credit Card (Singapore)",
+      "type": "credit_card",
+      "outstanding": "25000",
+      "principal": "100000",
+      "currency": "SGD",
+      "rate": null,
+      "key": "prashanth_ranganathan_dbs_credit_card_singapore"
+    },
+    {
+      "name": "Citibank Credit Card (US)",
+      "type": "credit_card",
+      "outstanding": "16400",
+      "principal": "60000",
+      "currency": "USD",
+      "rate": null,
+      "key": "prashanth_ranganathan_citibank_credit_card_us"
+    },
+    {
+      "name": "Mortgage — Dalvey Road (DBS)",
+      "type": "mortgage",
+      "outstanding": "4200000",
+      "principal": "6400000",
+      "currency": "SGD",
+      "rate": "0.0385",
+      "key": "prashanth_ranganathan_mortgage_dalvey_road_dbs"
+    },
+    {
+      "name": "Margin Facility — LGT",
+      "type": "margin_loan",
+      "outstanding": "900000",
+      "principal": "1600000",
+      "currency": "USD",
+      "rate": "0.0525",
+      "key": "prashanth_ranganathan_margin_facility_lgt"
+    },
+    {
+      "name": "ATO Tax Liability — FY2025",
+      "type": "tax_payable",
+      "outstanding": "640000",
+      "principal": "640000",
+      "currency": "AUD",
+      "rate": null,
+      "key": "prashanth_ranganathan_ato_tax_liability_fy2025"
+    },
+    {
+      "name": "PRTR Holdings — Guarantee to LGT",
+      "type": "guarantee",
+      "outstanding": "2000000",
+      "principal": "2000000",
+      "currency": "USD",
+      "rate": null,
+      "key": "prashanth_ranganathan_prtr_holdings_guarantee_to_lgt"
+    }
+  ],
+  "interactions": [
+    {
+      "source_type": "meeting_note",
+      "direction": "meeting",
+      "subject": "Quarterly Review — PRTR Family Office",
+      "days_ago": 20,
+      "duration_minutes": 75,
+      "attendees": [
+        "Prashanth Ranganathan",
+        "Tara Ranganathan",
+        "Arjun Mehta"
+      ],
+      "action_items": [
+        "Review LGT discretionary mandate performance vs benchmark",
+        "Explore direct lending allocation via Goldman Sachs",
+        "Update Withers on intermediary trust timeline",
+        "Rebalance UBS account — overweight NVDA after rally"
+      ],
+      "body": "Quarterly review with Prashanth and Tara at their Dalvey Road apartment. Total portfolio up ~14% YTD. LGT discretionary is outperforming by 200bps. Discussed moving $500K from Goldman Sachs treasuries into a direct lending fund. Tara wants to accelerate the intermediary trust setup — Withers needs to finalize the Singapore structure before year-end.",
+      "extracted_summary": "Portfolio +14% YTD, LGT outperforming. Key actions: direct lending allocation at GS, accelerate trust setup with Withers.",
+      "key": "prashanth_ranganathan_1_quarterly_review_prtr_family_office",
+      "memory_delta": {
+        "profile": {
+          "summary": "Portfolio +14% YTD, LGT outperforming. Key actions: direct lending allocation at GS, accelerate trust setup with Withers."
+        },
+        "next_actions": [
+          "Review LGT discretionary mandate performance vs benchmark",
+          "Explore direct lending allocation via Goldman Sachs",
+          "Update Withers on intermediary trust timeline",
+          "Rebalance UBS account — overweight NVDA after rally"
+        ],
+        "provenance": [
+          "interaction:prashanth_ranganathan_1_quarterly_review_prtr_family_office"
+        ]
+      },
+      "applied_to_memory": true
+    },
+    {
+      "source_type": "email",
+      "direction": "advisor_to_client",
+      "subject": "Direct Lending Options — Goldman Sachs",
+      "days_ago": 17,
+      "body": "Hi Prashanth,\n\nFollowed up with Goldman on direct lending. Three options:\n\n1. GS Private Credit Partners IV — 9-11% net IRR, 4-year lock, $500K min\n2. GS Direct Lending Select — 7-8% net, 2-year lock, $250K min\n3. Separately managed account (SMA) — custom terms, $2M min\n\nGiven the PRTR structure, Option 1 fits well. The 4-year lock aligns with your liquidity runway since the SGOV positions cover near-term needs.\n\nBest,\nArjun",
+      "extracted_summary": "Presented 3 Goldman direct lending options. Recommended GS Private Credit Partners IV ($500K, 9-11% IRR, 4yr lock).",
+      "key": "prashanth_ranganathan_2_direct_lending_options_goldman_sachs",
+      "memory_delta": {
+        "profile": {
+          "summary": "Presented 3 Goldman direct lending options. Recommended GS Private Credit Partners IV ($500K, 9-11% IRR, 4yr lock)."
+        },
+        "next_actions": [],
+        "provenance": [
+          "interaction:prashanth_ranganathan_2_direct_lending_options_goldman_sachs"
+        ]
+      },
+      "applied_to_memory": true
+    },
+    {
+      "source_type": "email",
+      "direction": "client_to_advisor",
+      "subject": "Re: Direct Lending Options — Goldman Sachs",
+      "days_ago": 15,
+      "body": "Arjun,\n\nLet's go with Option 1. Fund $500K from the Goldman SGOV position. Also — Withers confirmed they can have the intermediary trust docs ready by October. Can you coordinate with LGT on the asset transfer timeline once the trust is set up?\n\nPrashanth",
+      "extracted_summary": "Approved $500K into GS Private Credit Partners IV (funded from SGOV). Withers trust docs ready by October — need LGT transfer coordination.",
+      "key": "prashanth_ranganathan_3_re:_direct_lending_options_goldman_sachs",
+      "memory_delta": {
+        "profile": {
+          "summary": "Approved $500K into GS Private Credit Partners IV (funded from SGOV). Withers trust docs ready by October — need LGT transfer coordination."
+        },
+        "next_actions": [],
+        "provenance": [
+          "interaction:prashanth_ranganathan_3_re:_direct_lending_options_goldman_sachs"
+        ]
+      },
+      "applied_to_memory": true
+    },
+    {
+      "source_type": "valuation_update",
+      "direction": "internal",
+      "subject": "Private investment revaluation — nine holdings",
+      "days_ago": 14,
+      "duration_minutes": null,
+      "attendees": [
+        "Arjun Mehta"
+      ],
+      "action_items": [
+        "Confirm the revaluation basis for each of the nine private holdings",
+        "Restate the net worth movement as a revaluation, not a return"
+      ],
+      "body": "All nine private investments were remarked on 13 August, taking the private book from US$1.6m to US$2.4m. The marks are carried at the new values in historical_valuations from that date. This is a revaluation of existing holdings — no capital was added or withdrawn — and it accounts for almost all of the US$2.18m rise in net worth since 28 June.",
+      "extracted_summary": "Private book remarked 13 August, US$1.6m to US$2.4m. Revaluation, not return; explains most of the US$2.18m net worth rise.",
+      "key": "prashanth_ranganathan_4_private_investment_revaluation_nine_holdings",
+      "memory_delta": {
+        "profile": {
+          "summary": "Private book remarked 13 August from US$1.6m to US$2.4m; the movement in net worth since June is a revaluation rather than a return."
+        },
+        "next_actions": [
+          "Confirm the revaluation basis for each of the nine private holdings"
+        ],
+        "provenance": [
+          "interaction:prashanth_ranganathan_4_private_investment_revaluation_nine_holdings"
+        ]
+      },
+      "applied_to_memory": true
+    }
+  ],
+  "key": "prashanth_ranganathan",
+  "memory": {
+    "identity": {
+      "name": "Prashanth Ranganathan",
+      "tax_residency": [
+        "SG"
+      ],
+      "preferred_currency": "USD",
+      "preferred_language": "English",
+      "country_of_residence": "SG",
+      "country_of_origin": "AU",
+      "citizenships": [
+        "SG"
+      ]
+    },
+    "profile": {
+      "summary": "Singapore-based family office client with multi-custodian public portfolios, private investments, trust structuring, and diversified asset exposure.",
+      "source_confidence": "seeded"
+    },
+    "goals": {
+      "short_term": [
+        {
+          "name": "Fund GS Private Credit Partners IV from SGOV",
+          "notes": "Approved $500K allocation funded from Goldman SGOV position.",
+          "currency": "USD",
+          "priority": "high",
+          "flexibility": "low",
+          "target_date": "2026-09-15",
+          "time_horizon": "short term",
+          "target_amount": "500000",
+          "risk_level_for_goal": "moderate"
+        }
+      ],
+      "medium_term": [
+        {
+          "name": "Coordinate trust asset transfer timeline with LGT",
+          "notes": "Withers expects intermediary trust docs by October.",
+          "currency": "USD",
+          "priority": "high",
+          "flexibility": "medium",
+          "target_date": "2026-10-31",
+          "time_horizon": "medium term",
+          "target_amount": "",
+          "risk_level_for_goal": "conservative"
+        }
+      ],
+      "long_term": []
+    },
+    "financial_preferences": {
+      "constraints": {
+        "liquidity_needs": "SGOV positions provide near-term liquidity runway for private credit lockups.",
+        "restricted_assets": [],
+        "restricted_sectors": [],
+        "currency_constraints": [
+          "USD base with SGD, INR, AUD liabilities/assets."
+        ],
+        "jurisdiction_constraints": [
+          "Singapore, US trust, India/GIFT City exposures."
+        ],
+        "ethical_or_religious_constraints": []
+      },
+      "risk_tolerance": {
+        "notes": "Comfortable with growth, private investments, and direct lending when liquidity runway is clear.",
+        "stated_level": "Growth",
+        "loss_reaction": "Prefers structured review and benchmark comparison.",
+        "max_drawdown_comfort": "Moderate to high"
+      },
+      "investment_style": {
+        "fee_sensitivity": "",
+        "growth_vs_income": "Growth with income diversification through private credit.",
+        "active_vs_passive": "Uses multiple custodians plus private investment exposure.",
+        "tax_efficiency_priority": "High",
+        "simplicity_vs_optimization": "Accepts complexity for family office and trust structuring."
+      }
+    },
+    "financial_context": {
+      "other_context": "Has assets across DBS, Emirates NBD, HSBC India/GIFT City, IBKR, LGT, Goldman, UBS, private investments, digital assets, property, and yacht.",
+      "income_stability": "Entrepreneurial/family-office profile.",
+      "savings_capacity": "High",
+      "large_expected_expenses": [],
+      "emergency_cash_preference": "Maintains diversified bank liquidity and SGOV positions.",
+      "dependant_or_family_obligations": "Married, 2 kids"
+    },
+    "behavioral_profile": {
+      "notes": "Sophisticated, comfortable with multi-entity structures and direct investments.",
+      "confidence_level": "High",
+      "overtrading_tendency": "Medium",
+      "main_financial_concerns": [
+        "LGT mandate performance",
+        "Direct lending allocation",
+        "Trust setup timeline",
+        "NVDA overweight, held across all four custodians"
+      ],
+      "market_downturn_behavior": "Likely to rebalance concentration while maintaining strategic exposure.",
+      "preference_for_certainty": "Medium"
+    },
+    "communication_style": {
+      "detail_level": "High detail",
+      "decision_style": "Decisive after options are compared",
+      "tone_preference": "Direct and technical",
+      "preferred_format": "Option comparison with recommendation",
+      "financial_knowledge_level": "Very sophisticated"
+    },
+    "market_outlook": {
+      "behavior_rule": "Short term market views may affect questions, concerns, or tactical discussion, but they must not override long term goals unless the client explicitly says goals or constraints have changed.",
+      "short_term_views": [
+        "US tech rally has created NVDA overweight across accounts."
+      ],
+      "long_term_beliefs": [
+        "Private credit and direct investments can complement public market exposure."
+      ]
+    },
+    "non_financial_context": {
+      "notes": "Family office structure is central to planning.",
+      "values": [
+        "Control",
+        "Family continuity",
+        "Entrepreneurial growth"
+      ],
+      "interests": [
+        "Fintech",
+        "Direct lending",
+        "Trust structuring"
+      ],
+      "preferred_examples": [
+        "Show custody-level funding source and entity implications."
+      ]
+    },
+    "open_questions": [
+      {
+        "status": "open",
+        "category": "trust",
+        "priority": "high",
+        "question": "What is the LGT asset transfer timeline once Withers finalizes the intermediary trust?",
+        "created_at": "2026-08-12T00:00:00+00:00"
+      },
+      {
+        "status": "open",
+        "category": "concentration",
+        "priority": "high",
+        "question": "NVIDIA is held at all four custodians, so no single statement shows the whole position. Should it be consolidated, and is there a stated limit for technology exposure?",
+        "created_at": "2026-08-27T00:00:00+00:00"
+      },
+      {
+        "status": "open",
+        "category": "policy",
+        "priority": "medium",
+        "question": "There is no investment policy statement or target allocation on file. Should a technology or single-name limit be stated?",
+        "created_at": "2026-08-27T00:00:00+00:00"
+      }
+    ],
+    "next_actions": [
+      "Review the LGT discretionary mandate against benchmark. (Advisory)",
+      "Fund the US$500k GS Private Credit Partners IV call by 15 September.",
+      "Review the NVIDIA overweight at UBS.",
+      "Coordinate the LGT transfer timeline once Withers finalises the trust. (October)"
+    ],
+    "conflicts": [
+      {
+        "field": "citizenships",
+        "values": [
+          "AU (record)",
+          "SG (memory.identity)"
+        ],
+        "status": "unresolved",
+        "note": "Top-level citizenships and memory.identity.citizenships disagree. Nationality AU and tax residency SG are consistent across both; only citizenship differs."
+      }
+    ],
+    "metadata": {
+      "last_updated_at": "2026-08-27T00:00:00+00:00",
+      "completion_depth": {
+        "goals": "deep",
+        "identity": "deep",
+        "communication_style": "deep",
+        "market_outlook": "medium",
+        "financial_context": "deep",
+        "behavioral_profile": "medium",
+        "financial_preferences": "deep",
+        "non_financial_context": "deep"
+      }
+    },
+    "provenance": [
+      "seed_rm_with_history:interactions",
+      "interaction:prashanth_ranganathan_4_private_investment_revaluation_nine_holdings",
+      "portfolio_report:prashanth:2026-08-27"
+    ]
+  },
+  "insights": [
+    {
+      "title": "NVIDIA is split across all four custodians",
+      "body": "NVIDIA is US$3.57m, or 14.2% of the US$25.22m listed book, and it is held at Interactive Brokers, LGT, Goldman Sachs and UBS. No single custody statement shows the whole position, which is why the overweight was flagged at the 7 August review rather than caught by a statement.",
+      "chat_prompt": "Show Prashanth's NVIDIA position consolidated across all four custodians."
+    },
+    {
+      "title": "Technology is 56.6% of the listed book, against no stated limit",
+      "body": "Apple, Microsoft and NVIDIA together are US$14.28m of the US$25.22m listed book. There is no investment policy statement, mandate or target allocation on file, so the concentration is an observation rather than a breach.",
+      "chat_prompt": "Draft a technology exposure limit for Prashanth's listed portfolio."
+    },
+    {
+      "title": "Net worth is up US$2.18m, almost all of it a revaluation",
+      "body": "Net worth moved from US$53.2m to US$55.4m since 28 June. The 13 August remark of the nine private holdings accounts for almost all of it. It is a revaluation of what he already owned, not a return.",
+      "chat_prompt": "Separate revaluation from return in Prashanth's net worth movement since June."
+    },
+    {
+      "title": "GS Private Credit approved",
+      "body": "Prashanth approved a US$500K GS Private Credit Partners IV allocation funded from the Goldman SGOV position, due by 15 September. Ready cash is US$2.64m before the call and US$2.14m after it.",
+      "chat_prompt": "Draft funding instructions for Prashanth's GS private credit allocation."
+    },
+    {
+      "title": "Trust transfer timeline needed",
+      "body": "Withers expects intermediary trust documents by October, so LGT transfer coordination should start now. The transfer cannot begin until the trust completes, and there is no date from the counterparty yet.",
+      "chat_prompt": "Prepare questions for LGT about Prashanth's trust asset transfer timeline."
+    },
+    {
+      "title": "The largest single asset is not in his own name",
+      "body": "385 Fletcher Drive, Atherton is US$12.8m against a US$8.5m cost, and it is held by the Tara Ranganathan Living Trust, a US living trust in which he is a beneficiary rather than the legal owner. It is the largest single asset in the record and it does not sit on his personal balance sheet.",
+      "chat_prompt": "Explain the ownership and tax position of the Atherton property held in the Tara Ranganathan Living Trust."
+    }
+  ],
+  "priority": "high"
+}

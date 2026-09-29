@@ -1,0 +1,646 @@
+{
+  "full_name": "Eleanor Whitfield",
+  "date_of_birth": null,
+  "gender": "Female",
+  "base_currency": "SGD",
+  "primary_tax_jurisdiction": "SG",
+  "nationality": "GB",
+  "citizenships": [
+    "GB"
+  ],
+  "segment": "uhnw",
+  "client_since": "2011-04-18",
+  "family": [
+    {
+      "full_name": "James Whitfield",
+      "date_of_birth": null,
+      "birth_year": 1984,
+      "gender": "Male",
+      "nationality": "GB",
+      "citizenships": [
+        "GB"
+      ],
+      "relationship": "child",
+      "notes": "Eldest child. Interested in a more formal investment role."
+    },
+    {
+      "full_name": "Sophie Whitfield",
+      "date_of_birth": null,
+      "birth_year": 1987,
+      "gender": "Female",
+      "nationality": "GB",
+      "citizenships": [
+        "GB"
+      ],
+      "relationship": "child",
+      "notes": "Middle child. Exploring philanthropy and an education-focused foundation."
+    },
+    {
+      "full_name": "Daniel Whitfield",
+      "date_of_birth": null,
+      "birth_year": 1991,
+      "gender": "Male",
+      "nationality": "GB",
+      "citizenships": [
+        "GB"
+      ],
+      "relationship": "child",
+      "notes": "Youngest child. Limited involvement in family wealth decisions."
+    }
+  ],
+  "companies": [
+    {
+      "name": "Whitfield Family Trust",
+      "entity_type": "Discretionary Trust",
+      "jurisdiction": "SG",
+      "party_type": "trust",
+      "relationship": "settlor_and_beneficiary",
+      "holds_assets": [
+        {
+          "name": "Asia Growth Partners II",
+          "asset_type": "PRIVATE_INVESTMENT",
+          "currency": "SGD",
+          "market_value": "5700000",
+          "cost_value": null
+        },
+        {
+          "name": "Meridian Infrastructure Fund",
+          "asset_type": "PRIVATE_INVESTMENT",
+          "currency": "SGD",
+          "market_value": "4500000",
+          "cost_value": null
+        }
+      ]
+    },
+    {
+      "name": "Whitfield Holdings Pte. Ltd.",
+      "entity_type": "Family Holding Company",
+      "jurisdiction": "SG",
+      "party_type": "company",
+      "relationship": "ubo",
+      "holds_assets": [
+        {
+          "name": "Whitfield Manufacturing Ltd. — 12% shareholding",
+          "asset_type": "PRIVATE_COMPANY",
+          "currency": "SGD",
+          "market_value": "19000000",
+          "cost_value": null,
+          "ownership_percent": "12.0",
+          "jurisdiction": "UK",
+          "valuation_date": "2025-12-31"
+        }
+      ]
+    }
+  ],
+  "bank_accounts": [
+    {
+      "institution": "DBS Private Bank",
+      "jurisdiction": "Singapore",
+      "currency": "SGD",
+      "balance": "5000000",
+      "key": "eleanor_whitfield_dbs_private_bank_singapore",
+      "historical_balances": {}
+    },
+    {
+      "institution": "UBS",
+      "jurisdiction": "Singapore",
+      "currency": "SGD",
+      "balance": "3500000",
+      "key": "eleanor_whitfield_ubs_singapore",
+      "historical_balances": {}
+    },
+    {
+      "institution": "HSBC UK",
+      "jurisdiction": "United Kingdom",
+      "currency": "GBP",
+      "balance": null,
+      "balance_sgd_equivalent": "2500000",
+      "key": "eleanor_whitfield_hsbc_uk_united_kingdom",
+      "historical_balances": {}
+    }
+  ],
+  "brokerage_accounts": [
+    {
+      "institution": "UBS",
+      "jurisdiction": "Singapore",
+      "currency": "SGD",
+      "holdings": [
+        {
+          "symbol": "IG_BONDS",
+          "name": "Investment Grade Bond Portfolio",
+          "venue": null,
+          "price": null,
+          "market_value": "6800000",
+          "cost_basis": "6700000",
+          "asset_type": "fixed_income"
+        },
+        {
+          "symbol": "UBS_GLOBAL_EQ",
+          "name": "UBS Global Equity Fund",
+          "venue": null,
+          "price": null,
+          "market_value": "4200000",
+          "cost_basis": "3600000",
+          "asset_type": "fund"
+        },
+        {
+          "symbol": "UBS_DIVIDEND",
+          "name": "UBS Global Dividend Fund",
+          "venue": null,
+          "price": null,
+          "market_value": "3100000",
+          "cost_basis": "2900000",
+          "asset_type": "fund"
+        },
+        {
+          "symbol": "SHORT_BONDS",
+          "name": "Short Duration Bond Portfolio",
+          "venue": null,
+          "price": null,
+          "market_value": "2300000",
+          "cost_basis": "2250000",
+          "asset_type": "fixed_income"
+        }
+      ],
+      "key": "eleanor_whitfield_ubs_investment_account"
+    }
+  ],
+  "real_estate": [
+    {
+      "address": "Nassim Road, Singapore",
+      "name": "Singapore Residence",
+      "property_type": "Residential",
+      "country": "SG",
+      "purchase_price": null,
+      "current_value": "16000000",
+      "currency": "SGD",
+      "purchase_date": null,
+      "key": "eleanor_whitfield_singapore_residence",
+      "historical_valuations": {
+        "2026-06-30": "16000000"
+      }
+    },
+    {
+      "address": "Manchester, United Kingdom",
+      "name": "UK Commercial Property",
+      "property_type": "Commercial",
+      "country": "UK",
+      "purchase_price": null,
+      "current_value": "14000000",
+      "currency": "SGD",
+      "purchase_date": null,
+      "key": "eleanor_whitfield_uk_commercial_property",
+      "historical_valuations": {
+        "2025-10-01": "14000000"
+      }
+    },
+    {
+      "address": "Kensington, London",
+      "name": "London Townhouse",
+      "property_type": "Residential",
+      "country": "UK",
+      "purchase_price": null,
+      "current_value": "12000000",
+      "currency": "SGD",
+      "purchase_date": null,
+      "key": "eleanor_whitfield_london_townhouse",
+      "historical_valuations": {
+        "2026-04-15": "12000000"
+      }
+    },
+    {
+      "address": "Provence, France",
+      "name": "Provence Holiday Home",
+      "property_type": "Residential",
+      "country": "FR",
+      "purchase_price": null,
+      "current_value": "6000000",
+      "currency": "SGD",
+      "purchase_date": null,
+      "key": "eleanor_whitfield_provence_holiday_home",
+      "historical_valuations": {
+        "2026-05-20": "6000000"
+      }
+    }
+  ],
+  "private_investments": [
+    {
+      "name": "Northstar PE Fund IV",
+      "jurisdiction": "US",
+      "amount": "8400000",
+      "currency": "SGD",
+      "unfunded_commitment": "2400000",
+      "next_call_date": "2026-10-12",
+      "valuation_date": "2026-03-31",
+      "key": "eleanor_whitfield_northstar_pe_fund_iv",
+      "historical_valuations": {
+        "2026-03-31": "8400000"
+      }
+    },
+    {
+      "name": "Asia Growth Partners II",
+      "jurisdiction": "SG",
+      "amount": "5700000",
+      "currency": "SGD",
+      "unfunded_commitment": "1100000",
+      "next_call_date": "2026-11-04",
+      "valuation_date": "2026-06-30",
+      "key": "eleanor_whitfield_asia_growth_partners_ii",
+      "historical_valuations": {
+        "2026-06-30": "5700000"
+      }
+    },
+    {
+      "name": "Meridian Infrastructure Fund",
+      "jurisdiction": "SG",
+      "amount": "4500000",
+      "currency": "SGD",
+      "unfunded_commitment": "2500000",
+      "next_call_date": null,
+      "valuation_date": "2026-06-30",
+      "key": "eleanor_whitfield_meridian_infrastructure_fund",
+      "historical_valuations": {
+        "2026-06-30": "4500000"
+      }
+    },
+    {
+      "name": "Whitfield Ventures",
+      "jurisdiction": "UK",
+      "amount": "3000000",
+      "currency": "SGD",
+      "unfunded_commitment": "0",
+      "next_call_date": null,
+      "valuation_date": "2025-03-31",
+      "key": "eleanor_whitfield_whitfield_ventures",
+      "historical_valuations": {
+        "2025-03-31": "3000000"
+      }
+    }
+  ],
+  "digital_assets": [],
+  "vehicles": [],
+  "intellectual_property": [],
+  "collections": [],
+  "other_personal": [],
+  "liabilities": [
+    {
+      "name": "UK property refurbishment",
+      "type": "planned_capital_expenditure",
+      "outstanding": "1800000",
+      "principal": "1800000",
+      "currency": "SGD",
+      "rate": null,
+      "due_date": "2026-12-15",
+      "confidence": "medium",
+      "key": "eleanor_whitfield_uk_property_refurbishment"
+    },
+    {
+      "name": "Estimated tax payment",
+      "type": "tax_payable",
+      "outstanding": "900000",
+      "principal": "900000",
+      "currency": "SGD",
+      "rate": null,
+      "due_date": "2027-01-31",
+      "confidence": "medium",
+      "key": "eleanor_whitfield_estimated_tax_payment"
+    }
+  ],
+  "interactions": [
+    {
+      "source_type": "meeting_note",
+      "direction": "meeting",
+      "subject": "Family Governance and Succession Review",
+      "days_ago": null,
+      "duration_minutes": null,
+      "attendees": [
+        "Eleanor Whitfield"
+      ],
+      "action_items": [
+        "Prepare options for a family investment committee structure",
+        "Review trust distribution provisions with legal counsel",
+        "Arrange a philanthropy session with Sophie",
+        "Create a funding plan for the S$6.95m of commitments",
+        "Obtain an updated Whitfield Ventures valuation"
+      ],
+      "body": "Governance and succession review. The trust deed has been revised and is with her for review: successor trustees, distribution powers and investment committee authority all change, and she has not yet read it. James has asked by email for a more formal investment role, which matters because the revised deed would give an investment committee real authority. Sophie is exploring an education-focused foundation of S$2–3m, structure undecided. Her instruction is that no assets move until the governance discussion concludes, which freezes work that would otherwise be routine.",
+      "extracted_summary": "Revised trust deed awaiting her review; James requesting a formal investment role; Sophie exploring a S$2–3m education foundation; all asset transfers frozen pending the governance decision.",
+      "key": "eleanor_whitfield_1_family_governance_and_succession_review",
+      "memory_delta": {
+        "profile": {
+          "summary": "Governance, not markets, is what has moved. Asset transfers are frozen until the governance discussion concludes."
+        },
+        "next_actions": [
+          "Prepare options for a family investment committee structure",
+          "Review trust distribution provisions with legal counsel",
+          "Arrange a philanthropy session with Sophie"
+        ],
+        "provenance": [
+          "interaction:eleanor_whitfield_1_family_governance_and_succession_review"
+        ]
+      },
+      "applied_to_memory": true
+    },
+    {
+      "source_type": "email",
+      "direction": "client_to_advisor",
+      "subject": "A more formal role in the investment discussions",
+      "days_ago": null,
+      "duration_minutes": null,
+      "attendees": [
+        "James Whitfield",
+        "Eleanor Whitfield"
+      ],
+      "action_items": [
+        "Discuss James's request with Eleanor before the deed is signed"
+      ],
+      "body": "James wrote asking for a more formal role in investment decisions. Eleanor is open to discussing it but has not decided. The revised deed would give an investment committee real authority, so the two questions are the same question.",
+      "extracted_summary": "James requested a formal investment role by email. Eleanor open but undecided.",
+      "key": "eleanor_whitfield_2_a_more_formal_role_in_the_investment_discussions",
+      "memory_delta": {
+        "profile": {
+          "summary": "James has asked for a formal investment role; the decision is tied to the revised deed."
+        },
+        "next_actions": [
+          "Discuss James's request with Eleanor before the deed is signed"
+        ],
+        "provenance": [
+          "interaction:eleanor_whitfield_2_a_more_formal_role_in_the_investment_discussions"
+        ]
+      },
+      "applied_to_memory": true
+    }
+  ],
+  "key": "eleanor_whitfield",
+  "memory": {
+    "identity": {
+      "name": "Eleanor Whitfield",
+      "tax_residency": [
+        "SG"
+      ],
+      "preferred_currency": "SGD",
+      "preferred_language": "English",
+      "country_of_residence": "SG",
+      "country_of_origin": "GB",
+      "citizenships": [
+        "GB"
+      ]
+    },
+    "profile": {
+      "summary": "Singapore-resident British client. Net worth S$113.3m across four jurisdictions, three quarters of it in assets that cannot be sold inside a quarter: four properties, four private funds and a 12% stake in the family manufacturing company. One discretionary mandate at UBS. Governance and succession are the live questions, not markets.",
+      "source_confidence": "recorded"
+    },
+    "goals": {
+      "short_term": [
+        {
+          "name": "Fund the S$6.95m of dated commitments",
+          "notes": "Five dated payments between 12 October 2026 and 31 January 2027 against S$11.0m of cash. Paying them all takes cash to S$4.05m, S$2.95m below the S$7m she asked to keep accessible.",
+          "currency": "SGD",
+          "priority": "high",
+          "flexibility": "low",
+          "target_date": "2026-10-12",
+          "time_horizon": "short term",
+          "target_amount": "6950000",
+          "risk_level_for_goal": "conservative"
+        }
+      ],
+      "medium_term": [
+        {
+          "name": "Settle the governance and succession structure",
+          "notes": "Revised trust deed awaiting her review. Asset transfers are frozen until this concludes.",
+          "currency": "SGD",
+          "priority": "high",
+          "flexibility": "medium",
+          "target_date": null,
+          "time_horizon": "medium term",
+          "target_amount": "",
+          "risk_level_for_goal": "conservative"
+        },
+        {
+          "name": "Establish Sophie's education foundation",
+          "notes": "S$2–3m explored. Structure undecided: separate vehicle or inside the existing family structure.",
+          "currency": "SGD",
+          "priority": "medium",
+          "flexibility": "high",
+          "target_date": null,
+          "time_horizon": "medium term",
+          "target_amount": "",
+          "risk_level_for_goal": "conservative"
+        }
+      ],
+      "long_term": []
+    },
+    "financial_preferences": {
+      "constraints": {
+        "liquidity_needs": "At least S$7m to remain accessible. The only threshold she has stated.",
+        "restricted_assets": [],
+        "restricted_sectors": [],
+        "currency_constraints": [
+          "SGD base. One GBP account, carried as an SGD equivalent."
+        ],
+        "jurisdiction_constraints": [
+          "Singapore residence, UK assets and company, US fund, French property."
+        ],
+        "ethical_or_religious_constraints": []
+      },
+      "risk_tolerance": {
+        "notes": "No stated risk level on file. What is on file is a liquidity floor and an instruction to freeze transfers, both of which point to control rather than return.",
+        "stated_level": "",
+        "loss_reaction": "",
+        "max_drawdown_comfort": ""
+      },
+      "investment_style": {
+        "fee_sensitivity": "",
+        "growth_vs_income": "",
+        "active_vs_passive": "One discretionary mandate at UBS; no self-directed trading on file.",
+        "tax_efficiency_priority": "",
+        "simplicity_vs_optimization": "Holds a trust and a holding company alongside personal assets."
+      }
+    },
+    "financial_context": {
+      "other_context": "76.4% of assets cannot be sold inside a quarter, and there is no written policy saying that is the intent. S$17.0m was last valued more than nine months ago. S$16.4m of listed securities has no jurisdiction recorded.",
+      "income_stability": "",
+      "savings_capacity": "",
+      "large_expected_expenses": [
+        {
+          "name": "Northstar PE Fund IV capital call",
+          "amount": "2400000",
+          "due_date": "2026-10-12",
+          "confidence": "high"
+        },
+        {
+          "name": "Asia Growth Partners II capital call",
+          "amount": "1100000",
+          "due_date": "2026-11-04",
+          "confidence": "high"
+        },
+        {
+          "name": "UK property refurbishment",
+          "amount": "1800000",
+          "due_date": "2026-12-15",
+          "confidence": "medium"
+        },
+        {
+          "name": "Annual family distributions",
+          "amount": "750000",
+          "due_date": "2026-12-20",
+          "confidence": "high"
+        },
+        {
+          "name": "Estimated tax payment",
+          "amount": "900000",
+          "due_date": "2027-01-31",
+          "confidence": "medium"
+        }
+      ],
+      "emergency_cash_preference": "At least S$7m accessible.",
+      "dependant_or_family_obligations": "Three adult children. Annual family distributions of S$750k."
+    },
+    "behavioral_profile": {
+      "notes": "Not characterised in her file beyond what she has instructed.",
+      "confidence_level": "",
+      "overtrading_tendency": "",
+      "main_financial_concerns": [
+        "Successor trustees and distribution powers in the revised deed",
+        "Whether an investment committee should have real authority, and who sits on it",
+        "James's request for a formal investment role",
+        "Sophie's foundation structure"
+      ],
+      "market_downturn_behavior": "",
+      "preference_for_certainty": ""
+    },
+    "communication_style": {
+      "detail_level": "",
+      "decision_style": "Defers decisions until the governance question is settled.",
+      "tone_preference": "",
+      "preferred_format": "",
+      "financial_knowledge_level": ""
+    },
+    "market_outlook": {
+      "behavior_rule": "Short term market views may affect questions, concerns, or tactical discussion, but they must not override long term goals unless the client explicitly says goals or constraints have changed.",
+      "short_term_views": [],
+      "long_term_beliefs": []
+    },
+    "non_financial_context": {
+      "notes": "Governance and succession are the centre of her planning, not returns.",
+      "values": [
+        "Control",
+        "Family continuity",
+        "Philanthropy"
+      ],
+      "interests": [
+        "Family governance",
+        "Education philanthropy"
+      ],
+      "preferred_examples": []
+    },
+    "open_questions": [
+      {
+        "status": "open",
+        "category": "governance",
+        "priority": "high",
+        "question": "Has she reviewed the revised trust deed, and does she accept the successor trustees, distribution powers and investment committee authority as drafted?",
+        "created_at": "2026-06-30T00:00:00+00:00"
+      },
+      {
+        "status": "open",
+        "category": "governance",
+        "priority": "high",
+        "question": "Should James have a formal investment role, and should that sit on an investment committee under the revised deed?",
+        "created_at": "2026-06-30T00:00:00+00:00"
+      },
+      {
+        "status": "open",
+        "category": "liquidity",
+        "priority": "high",
+        "question": "How are the S$6.95m of dated commitments funded without taking cash S$2.95m below the S$7m she asked to keep accessible?",
+        "created_at": "2026-06-30T00:00:00+00:00"
+      },
+      {
+        "status": "open",
+        "category": "valuation",
+        "priority": "medium",
+        "question": "Whitfield Ventures was last valued 31 March 2025, fifteen months ago. When can an updated valuation be obtained?",
+        "created_at": "2026-06-30T00:00:00+00:00"
+      },
+      {
+        "status": "open",
+        "category": "policy",
+        "priority": "medium",
+        "question": "Is 76.4% in assets that cannot be sold inside a quarter the intended position? Nothing on file states it as a policy.",
+        "created_at": "2026-06-30T00:00:00+00:00"
+      },
+      {
+        "status": "open",
+        "category": "philanthropy",
+        "priority": "medium",
+        "question": "Should Sophie's S$2–3m foundation sit in a separate vehicle or inside the existing family structure?",
+        "created_at": "2026-06-30T00:00:00+00:00"
+      }
+    ],
+    "next_actions": [
+      "Prepare options for a family investment committee structure. (Advisory)",
+      "Create a funding plan for the S$6.95m of commitments, before 12 October.",
+      "Obtain an updated Whitfield Ventures valuation.",
+      "Review trust distribution provisions with legal counsel. (Legal)",
+      "Arrange a philanthropy session with Sophie."
+    ],
+    "conflicts": [
+      {
+        "field": "jurisdiction_of_listed_securities",
+        "values": [
+          "unstated (record)",
+          "UBS is a Singapore custodian (inferred)"
+        ],
+        "status": "unresolved",
+        "note": "S$16.4m of listed securities has no jurisdiction on file. UBS is a custodian, not a jurisdiction, so the amount is reported as unstated rather than assigned to Singapore."
+      }
+    ],
+    "metadata": {
+      "last_updated_at": "2026-06-30T00:00:00+00:00",
+      "completion_depth": {
+        "goals": "medium",
+        "identity": "deep",
+        "communication_style": "shallow",
+        "market_outlook": "shallow",
+        "financial_context": "medium",
+        "behavioral_profile": "shallow",
+        "financial_preferences": "medium",
+        "non_financial_context": "medium"
+      }
+    },
+    "provenance": [
+      "interaction:eleanor_whitfield_1_family_governance_and_succession_review",
+      "interaction:eleanor_whitfield_2_a_more_formal_role_in_the_investment_discussions",
+      "portfolio_report:eleanor:2026-06-30"
+    ]
+  },
+  "insights": [
+    {
+      "title": "Cash falls below her own floor at the first capital call",
+      "body": "S$11.0m of cash against S$6.95m of dated payments between October and January. Paying them all leaves S$4.05m, which is S$2.95m below the S$7m she asked to keep accessible. The line crosses at the very first call on 12 October and never comes back above it. A further S$6.0m of uncalled commitments is undated and sits on top.",
+      "chat_prompt": "Build a funding plan for Eleanor's S$6.95m of commitments that holds the S$7m floor."
+    },
+    {
+      "title": "S$17.0m was last valued more than nine months ago",
+      "body": "Whitfield Ventures at S$3.0m was last valued 31 March 2025, fifteen months ago, and the UK commercial property at S$14.0m on 1 October 2025, nine months ago. Her file treats nine months as stale. Both are at or past it.",
+      "chat_prompt": "Request updated valuations for Whitfield Ventures and the UK commercial property."
+    },
+    {
+      "title": "Three quarters of the money cannot be sold inside a quarter",
+      "body": "S$88.6m of S$116.0m — four properties, four private funds and the 12% manufacturing stake. Nothing on file states that as the intended position, so it is an observation rather than a policy being met or missed.",
+      "chat_prompt": "Draft a liquidity policy for Eleanor covering the share of assets held in illiquid form."
+    },
+    {
+      "title": "Nothing can move until the governance question is settled",
+      "body": "Her instruction is that no assets transfer until the governance discussion concludes. The revised deed is with her and unread. That single decision gates the trust work, James's role, Sophie's foundation and any restructuring of the illiquid position.",
+      "chat_prompt": "Summarise what is blocked for Eleanor pending the governance decision, and in what order it unblocks."
+    },
+    {
+      "title": "There is no performance history on file",
+      "body": "Her securities carry a cost basis and a market value and nothing in between: S$16.4m against S$15.45m, or +6.1% on cost with no holding period recorded. There is no monthly series and no benchmark, so no return can be stated for any period.",
+      "chat_prompt": "What would be needed to produce a performance history for Eleanor's UBS mandate?"
+    }
+  ],
+  "priority": "high"
+}

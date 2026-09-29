@@ -10,7 +10,9 @@ function ThemeProvider({
   return (
     <NextThemesProvider
       attribute="class"
-      defaultTheme="system"
+      // Light unless the reader chooses otherwise. These pages are set as printed
+      // research documents, so paper is the right default rather than the OS setting.
+      defaultTheme="light"
       enableSystem
       disableTransitionOnChange
       {...props}

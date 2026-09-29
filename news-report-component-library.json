@@ -1,0 +1,251 @@
+{
+  "id": "portfolio-news-briefing",
+  "version": "1.0.0",
+  "purpose": "Route sourced portfolio news into the reusable components of the news report. The output is a NewsBriefing object, not JSX or arbitrary layout instructions.",
+  "implementation": {
+    "types": "components/news-report/report-types.ts",
+    "components": "components/news-report/report-components.tsx",
+    "holdingCarousel": "components/news-report/top-developments.tsx",
+    "referencePayload": "app/lab/news-report/report-data.ts#briefing",
+    "renderer": "app/lab/news-report/page.tsx",
+    "status": "The reference page now renders from component props. The backend still needs to validate and supply its own payload."
+  },
+  "routing_order": [
+    "Extract atomic facts with their source article IDs and the holdings they affect. Do not generate presentation copy yet.",
+    "Group multiple articles about the same underlying event into one development. Article count is not development count.",
+    "Rank holding developments by portfolio relevance, novelty, materiality and evidence strength. Pick one lead story per affected holding.",
+    "Route forward-looking observations to NextSignals only when the source supports a concrete observable signal and its implication. Do not turn a possibility into a prediction.",
+    "Create a theme only when it connects at least two distinct holdings or developments and explains the connection; otherwise keep the fact in its holding story.",
+    "Select source articles that substantiate the displayed claims. Preserve publisher and publication time. Keep total article count separate from the selected-source count.",
+    "Write the hero last, from the ranked developments. If sentiment counts are unavailable, omit NewsSentiment instead of estimating them."
+  ],
+  "section_policy": {
+    "binding": "soft",
+    "order": ["hero", "developments", "what-happens-next", "themes", "sources"],
+    "rules": [
+      "Hero and developments are required to produce this report. Reject or defer a payload without a substantiated lead development.",
+      "Omit an optional section when its array is empty. Do not add filler text or a zero state to make every report look identical.",
+      "A fact may support several sections, but its full explanation should live in one place. Other sections should add a new angle instead of repeating the same paragraph.",
+      "Do not reorder sections for visual variety. Vary their contents by selecting only warranted components.",
+      "Section titles and order are renderer-owned defaults; the LLM supplies content, not new section names or arbitrary component identifiers."
+    ],
+    "sections": [
+      {
+        "id": "hero",
+        "title": "Today’s readout",
+        "required": true,
+        "render_when": "A lead development is known.",
+        "answers": "What is the one point the reader should take away from this briefing?",
+        "components": ["ReportHero", "NewsSentiment"],
+        "rejects": [
+          "a list of all headlines",
+          "unsupported market-wide claims",
+          "sentiment inferred from only selected sources"
+        ]
+      },
+      {
+        "id": "developments",
+        "title": "What matters most",
+        "required": true,
+        "render_when": "At least one affected holding has a sourced development.",
+        "answers": "Which holding is affected, what happened, and why is it relevant to this portfolio?",
+        "components": ["TopDevelopments"],
+        "rejects": [
+          "one card per article",
+          "duplicate cards for one holding",
+          "a story with no portfolio connection"
+        ]
+      },
+      {
+        "id": "what-happens-next",
+        "title": "What happens next",
+        "required": false,
+        "render_when": "At least one nextSignal has both an observable signal and a sourced reason it matters.",
+        "answers": "What would clarify the story after this briefing?",
+        "components": ["NextSignals"],
+        "rejects": [
+          "generic watchlists",
+          "unattributed forecasts",
+          "repeating the holding-card body"
+        ]
+      },
+      {
+        "id": "themes",
+        "title": "Themes in motion",
+        "required": false,
+        "render_when": "At least one cross-holding theme can explain a connection beyond shared keywords.",
+        "answers": "How do separate holdings and developments connect?",
+        "components": ["ThemeConnections"],
+        "rejects": [
+          "single-holding topics",
+          "keyword clusters without a relationship",
+          "summed article counts presented as unique when articles overlap"
+        ]
+      },
+      {
+        "id": "sources",
+        "title": "Sources & coverage",
+        "required": false,
+        "render_when": "At least one displayable article has title, publisher and publication time.",
+        "answers": "Which articles support the briefing?",
+        "components": ["SourceCoverage"],
+        "rejects": [
+          "fabricated article metadata",
+          "a selected-source count labeled as the total article count"
+        ]
+      }
+    ]
+  },
+  "components": [
+    {
+      "id": "ReportHero",
+      "module": "components/news-report/report-components.tsx",
+      "input_path": "hero",
+      "input_type": "BriefingHero",
+      "answers": "What dominates the readout and what context makes it matter?",
+      "required_fields": [
+        "eyebrow",
+        "dateline",
+        "marketSession",
+        "title",
+        "summary"
+      ],
+      "rules": [
+        "One synthesis headline, not a concatenation of article titles.",
+        "Summary distinguishes verified events from interpretation.",
+        "Use a report date and market session supported by the briefing metadata."
+      ]
+    },
+    {
+      "id": "NewsSentiment",
+      "module": "components/news-report/report-components.tsx",
+      "input_path": "hero.sentiment",
+      "input_type": "SentimentSummary",
+      "answers": "How are classified news signals distributed?",
+      "required_fields": [
+        "headline",
+        "summary",
+        "bearish",
+        "neutral",
+        "bullish"
+      ],
+      "rules": [
+        "Counts are nonnegative integers drawn from the full classified signal set.",
+        "The summary and headline must agree with the counts.",
+        "Do not infer counts from the four selected sources.",
+        "Omit when no classified signal set exists."
+      ]
+    },
+    {
+      "id": "TopDevelopments",
+      "module": "components/news-report/top-developments.tsx",
+      "input_path": "holdings",
+      "input_type": "DevelopmentStory[]",
+      "answers": "What is the lead news for each affected holding?",
+      "required_fields_per_item": [
+        "ticker",
+        "name",
+        "exposure",
+        "category",
+        "relevance",
+        "title",
+        "body",
+        "signal",
+        "tone",
+        "updates"
+      ],
+      "rules": [
+        "One card per holding; rank cards by relevance to the portfolio.",
+        "Exposure comes from portfolio data, not the news articles.",
+        "Category is the story topic; relevance is portfolio impact; tone is news direction. Do not conflate them.",
+        "Group secondary developments in updates only when they add new information.",
+        "Use positive, negative or neutral tone; the signal wording must agree with it.",
+        "Send watch points through nextSignals and article metadata through sources, not as unused fields on a holding card."
+      ]
+    },
+    {
+      "id": "NextSignals",
+      "module": "components/news-report/report-components.tsx",
+      "input_path": "nextSignals",
+      "input_type": "NextSignal[]",
+      "answers": "What evidence should the reader watch for next, and why?",
+      "required_fields_per_item": ["ticker", "name", "signal", "whyItMatters"],
+      "rules": [
+        "Ticker must exist in holdings.",
+        "Signal must be observable, such as a decision, release, filing, adoption measure or dated event.",
+        "whyItMatters explains the possible interpretation without claiming an outcome."
+      ]
+    },
+    {
+      "id": "ThemeConnections",
+      "module": "components/news-report/report-components.tsx",
+      "input_path": "themes",
+      "input_type": "NewsTheme[]",
+      "answers": "What relationship links distinct holding stories?",
+      "required_fields_per_item": [
+        "id",
+        "title",
+        "icon",
+        "tickers",
+        "developmentCount",
+        "articleCount",
+        "body",
+        "signal",
+        "tone"
+      ],
+      "rules": [
+        "Use icon network, legal or trend as a rendering hint; never emit a component or SVG name.",
+        "Every ticker must exist in holdings and a theme normally spans at least two tickers.",
+        "The body must explain the connection, not merely repeat article headlines.",
+        "Counts may overlap across themes; disclose overlap when present."
+      ]
+    },
+    {
+      "id": "SourceCoverage",
+      "module": "components/news-report/report-components.tsx",
+      "input_path": "sources",
+      "input_type": "NewsSource[]",
+      "answers": "Where can the reader inspect the selected evidence?",
+      "required_fields_per_item": [
+        "id",
+        "title",
+        "publisher",
+        "publishedAt",
+        "signal",
+        "tone"
+      ],
+      "rules": [
+        "IDs are unique and stable within the briefing.",
+        "URL is optional; if present it must point to the article.",
+        "Publication time and publisher come from source metadata, not generated prose.",
+        "articleCount is the total analyzed; sources.length is the selected coverage count."
+      ]
+    }
+  ],
+  "structural_components": [
+    {
+      "id": "ReportSection",
+      "module": "components/news-report/report-components.tsx",
+      "owner": "renderer",
+      "rule": "Wraps each conditional body with the fixed title and subtitle. The LLM does not select this component directly."
+    }
+  ],
+  "output_contract": {
+    "type": "NewsBriefing",
+    "file": "components/news-report/report-types.ts",
+    "top_level_required": ["recipient", "reportDate", "hero", "holdings"],
+    "top_level_optional": [
+      "nextSignals",
+      "portfolioWatch",
+      "themes",
+      "themeFootnote",
+      "sources",
+      "articleCount",
+      "referenceNote"
+    ],
+    "allowed_tones": ["positive", "negative", "neutral"],
+    "allowed_theme_icons": ["network", "legal", "trend"],
+    "empty_section_behavior": "Omit the optional property or supply an empty array; the renderer hides that section.",
+    "no_match_behavior": "Keep the fact in the evidence record for review. Do not force it into an unrelated component or invent a new component ID."
+  }
+}
